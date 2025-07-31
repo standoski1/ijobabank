@@ -25,6 +25,7 @@ import Link from 'next/link'
 export default function Dashboard() {
   const [showBalance, setShowBalance] = useState(true)
   const [activeTab, setActiveTab] = useState('overview')
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
   const accountData = {
     balance: 25480.50,
@@ -76,9 +77,9 @@ export default function Dashboard() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className={`min-h-screen ${isDarkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
@@ -88,10 +89,10 @@ export default function Dashboard() {
             </div>
             
             <div className="flex items-center space-x-4">
-              <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors">
+              <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
                 <Search className="w-5 h-5" />
               </button>
-              <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors relative">
+              <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors relative">
                 <Bell className="w-5 h-5" />
                 <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
               </button>
@@ -99,7 +100,7 @@ export default function Dashboard() {
                 <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
                   <User className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-sm font-medium text-gray-700">John Doe</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">John Doe</span>
               </div>
             </div>
           </div>
@@ -110,7 +111,7 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <nav className="bg-white rounded-xl shadow-sm p-6">
+            <nav className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
               <div className="space-y-2">
                 {[
                   { id: 'overview', label: 'Overview', icon: Home },
@@ -125,7 +126,7 @@ export default function Dashboard() {
                     className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 ${
                       activeTab === item.id
                         ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
-                        : 'text-gray-600 hover:bg-gray-50'
+                        : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
                     }`}
                   >
                     <item.icon className="w-5 h-5" />
@@ -134,8 +135,8 @@ export default function Dashboard() {
                 ))}
               </div>
               
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <Link href="/login" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:text-red-600 transition-colors">
+              <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <Link href="/login" className="flex items-center space-x-3 px-4 py-3 text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors">
                   <LogOut className="w-5 h-5" />
                   <span className="font-medium">Sign Out</span>
                 </Link>
@@ -150,16 +151,16 @@ export default function Dashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="bg-white rounded-xl shadow-sm p-6"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6"
             >
               <div className="flex justify-between items-start mb-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900">Account Overview</h2>
-                  <p className="text-gray-600">Welcome back, John!</p>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Account Overview</h2>
+                  <p className="text-gray-600 dark:text-gray-300">Welcome back, John!</p>
                 </div>
                 <button
                   onClick={() => setShowBalance(!showBalance)}
-                  className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                  className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                 >
                   {showBalance ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -201,24 +202,24 @@ export default function Dashboard() {
 
               {/* Quick Actions */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Quick Actions</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {quickActions.map((action, index) => (
                     <motion.button
                       key={index}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                      className="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
                     >
                       <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-2 ${
-                        action.color === 'blue' ? 'bg-blue-100 text-blue-600' :
-                        action.color === 'purple' ? 'bg-purple-100 text-purple-600' :
-                        action.color === 'green' ? 'bg-green-100 text-green-600' :
-                        'bg-orange-100 text-orange-600'
+                        action.color === 'blue' ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' :
+                        action.color === 'purple' ? 'bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-400' :
+                        action.color === 'green' ? 'bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400' :
+                        'bg-orange-100 dark:bg-orange-900 text-orange-600 dark:text-orange-400'
                       }`}>
                         <action.icon className="w-6 h-6" />
                       </div>
-                      <span className="text-sm font-medium text-gray-700">{action.label}</span>
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{action.label}</span>
                     </motion.button>
                   ))}
                 </div>
@@ -230,11 +231,11 @@ export default function Dashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white rounded-xl shadow-sm p-6"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6"
             >
               <div className="flex justify-between items-center mb-6">
-                <h3 className="text-xl font-bold text-gray-900">Recent Transactions</h3>
-                <button className="text-blue-600 hover:text-blue-700 font-medium transition-colors">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Recent Transactions</h3>
+                <button className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium transition-colors">
                   View All
                 </button>
               </div>
@@ -244,7 +245,7 @@ export default function Dashboard() {
                   <motion.div
                     key={transaction.id}
                     whileHover={{ scale: 1.02 }}
-                    className="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
+                    className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
                   >
                     <div className="flex items-center space-x-4">
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
@@ -259,8 +260,8 @@ export default function Dashboard() {
                         )}
                       </div>
                       <div>
-                        <p className="font-medium text-gray-900">{transaction.description}</p>
-                        <p className="text-sm text-gray-500">{transaction.category}</p>
+                        <p className="font-medium text-gray-900 dark:text-white">{transaction.description}</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">{transaction.category}</p>
                       </div>
                     </div>
                     <div className="text-right">
@@ -269,7 +270,7 @@ export default function Dashboard() {
                       }`}>
                         {transaction.type === 'credit' ? '+' : '-'}${transaction.amount.toFixed(2)}
                       </p>
-                      <p className="text-sm text-gray-500">{transaction.date}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{transaction.date}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -281,50 +282,50 @@ export default function Dashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-white rounded-xl shadow-sm p-6"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6"
             >
-              <h3 className="text-xl font-bold text-gray-900 mb-6">Account Details</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Account Details</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-4">Account Information</h4>
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-4">Account Information</h4>
                   <div className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Account Number:</span>
-                      <span className="font-medium">{accountData.accountNumber}</span>
+                      <span className="text-gray-600 dark:text-gray-400">Account Number:</span>
+                      <span className="font-medium text-gray-900 dark:text-white">{accountData.accountNumber}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Account Type:</span>
-                      <span className="font-medium">{accountData.accountType}</span>
+                      <span className="text-gray-600 dark:text-gray-400">Account Type:</span>
+                      <span className="font-medium text-gray-900 dark:text-white">{accountData.accountType}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Currency:</span>
-                      <span className="font-medium">{accountData.currency}</span>
+                      <span className="text-gray-600 dark:text-gray-400">Currency:</span>
+                      <span className="font-medium text-gray-900 dark:text-white">{accountData.currency}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Status:</span>
+                      <span className="text-gray-600 dark:text-gray-400">Status:</span>
                       <span className="text-green-600 font-medium">Active</span>
                     </div>
                   </div>
                 </div>
                 
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-4">Security Status</h4>
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-4">Security Status</h4>
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-gray-600">Two-Factor Auth:</span>
+                      <span className="text-gray-600 dark:text-gray-400">Two-Factor Auth:</span>
                       <span className="text-green-600 font-medium">Enabled</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-gray-600">Last Login:</span>
-                      <span className="font-medium">Today, 9:30 AM</span>
+                      <span className="text-gray-600 dark:text-gray-400">Last Login:</span>
+                      <span className="font-medium text-gray-900 dark:text-white">Today, 9:30 AM</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-gray-600">Device:</span>
-                      <span className="font-medium">Chrome on Windows</span>
+                      <span className="text-gray-600 dark:text-gray-400">Device:</span>
+                      <span className="font-medium text-gray-900 dark:text-white">Chrome on Windows</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-gray-600">Location:</span>
-                      <span className="font-medium">Houston, TX</span>
+                      <span className="text-gray-600 dark:text-gray-400">Location:</span>
+                      <span className="font-medium text-gray-900 dark:text-white">Houston, TX</span>
                     </div>
                   </div>
                 </div>
@@ -332,6 +333,16 @@ export default function Dashboard() {
             </motion.div>
           </div>
         </div>
+      </div>
+
+      {/* Dark Mode Toggle */}
+      <div className="fixed top-4 right-4 z-50">
+        <button
+          onClick={() => setIsDarkMode(!isDarkMode)}
+          className="p-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        >
+          {isDarkMode ? '☀️' : '🌙'}
+        </button>
       </div>
     </div>
   )
