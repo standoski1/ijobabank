@@ -84,10 +84,10 @@ export default function Home() {
               <div className="flex-shrink-0">
                 <div className="flex items-center space-x-2">
                   <div className="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center">
-                    <span className="text-blue-900 font-bold text-lg">KP</span>
+                    <span className="text-blue-900 font-bold text-lg">IB</span>
                   </div>
                   <div>
-                    <h1 className="text-xl font-bold">KeyPrime</h1>
+                    <h1 className="text-xl font-bold">IjobaBank</h1>
                     <p className="text-blue-200 text-sm">Trust Banking</p>
                   </div>
                 </div>
