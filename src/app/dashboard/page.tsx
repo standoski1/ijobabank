@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { 
   DollarSign, 
   CreditCard, 
@@ -19,9 +21,44 @@ import {
   Plus,
   MessageCircle
 } from 'lucide-react'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts'
+
+const stockData = [
+  { time: '09:00', price: 205.50 },
+  { time: '10:00', price: 206.20 },
+  { time: '11:00', price: 207.80 },
+  { time: '12:00', price: 208.50 },
+  { time: '13:00', price: 207.90 },
+  { time: '14:00', price: 207.57 },
+  { time: '15:00', price: 206.80 },
+  { time: '16:00', price: 207.57 },
+]
+
+const transactionData = [
+  { month: 'Jan', income: 4000, expenses: 2400 },
+  { month: 'Feb', income: 3000, expenses: 1398 },
+  { month: 'Mar', income: 2000, expenses: 9800 },
+  { month: 'Apr', income: 2780, expenses: 3908 },
+  { month: 'May', income: 1890, expenses: 4800 },
+  { month: 'Jun', income: 2390, expenses: 3800 },
+  { month: 'Jul', income: 3490, expenses: 4300 },
+]
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('profile')
+  const [selectedStock, setSelectedStock] = useState('Apple')
+  const router = useRouter()
+
+  const handleLogout = () => {
+    // Add any logout logic here (clear tokens, etc.)
+    router.push('/')
+  }
+
+  const stocks = [
+    { name: 'Apple', symbol: 'AAPL', price: 207.57, change: -1.48, changePercent: -0.71 },
+    { name: 'Google', symbol: 'GOOGL', price: 142.56, change: 2.34, changePercent: 1.67 },
+    { name: 'Microsoft', symbol: 'MSFT', price: 378.85, change: 5.67, changePercent: 1.52 }
+  ]
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -63,7 +100,7 @@ export default function Dashboard() {
 
       <div className="flex">
         {/* Sidebar */}
-        <aside className="w-64 bg-blue-900 min-h-screen">
+        <aside className="w-64 bg-blue-900 min-h-screen relative">
           <nav className="mt-8">
             <div className="px-4 space-y-2">
               <div className="flex items-center justify-between p-3 text-white hover:bg-blue-800 rounded-lg cursor-pointer">
@@ -132,7 +169,10 @@ export default function Dashboard() {
             </div>
             
             <div className="absolute bottom-8 left-4 right-4">
-              <button className="w-full bg-red-600 hover:bg-red-700 text-white p-3 rounded-lg flex items-center justify-center space-x-2">
+              <button 
+                onClick={handleLogout}
+                className="w-full bg-red-600 hover:bg-red-700 text-white p-3 rounded-lg flex items-center justify-center space-x-2 transition-colors"
+              >
                 <LogOut className="w-5 h-5" />
                 <span>Logout</span>
               </button>
@@ -192,9 +232,9 @@ export default function Dashboard() {
             >
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="text-lg font-semibold mb-2">Account Balance</h3>
+                  <h3 className="text-lg font-semibold mb-2">Current Balance</h3>
                   <p className="text-3xl font-bold">USD $ 2,531,000</p>
-                  <p className="text-green-200 text-sm mt-2">Today 31-07-25 08:01:53</p>
+                  <p className="text-green-200 text-sm mt-2">0.05% from Current Balance: USD $ 2,531,000</p>
                 </div>
                 <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
                   <DollarSign className="w-6 h-6" />
@@ -206,26 +246,125 @@ export default function Dashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-green-600 text-white rounded-xl p-6 shadow-lg"
+              className="bg-blue-600 text-white rounded-xl p-6 shadow-lg"
             >
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="text-lg font-semibold mb-2">Ledger Balance</h3>
-                  <p className="text-3xl font-bold">USD $ 2,531,000</p>
-                  <p className="text-green-200 text-sm mt-2">0.05% from Current Balance: USD $ 2,531,000</p>
+                  <h3 className="text-lg font-semibold mb-2">Loan App Status</h3>
+                  <p className="text-3xl font-bold">ACTIVE</p>
+                  <p className="text-blue-200 text-sm mt-2">Transfer Mode: WIRE/LOCAL</p>
                 </div>
-                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                  <DollarSign className="w-6 h-6" />
+                <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                  <TrendingUp className="w-6 h-6" />
                 </div>
               </div>
             </motion.div>
           </div>
 
-          {/* Transaction Statistics */}
+          {/* Investment App Mode Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
+            className="bg-yellow-500 text-black rounded-xl p-6 shadow-lg mb-8"
+          >
+            <div className="flex justify-between items-start">
+              <div>
+                <h3 className="text-lg font-semibold mb-2">Investment App Mode</h3>
+                <p className="text-3xl font-bold">ACTIVE</p>
+                <p className="text-yellow-800 text-sm mt-2">Investment by Plan Selection</p>
+              </div>
+              <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
+                <TrendingUp className="w-6 h-6" />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Stock Chart Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="bg-white rounded-xl p-6 shadow-lg mb-8"
+          >
+            <div className="flex justify-between items-center mb-6">
+              <div>
+                <h3 className="text-xl font-bold text-gray-900">Stock Information</h3>
+                <p className="text-gray-600">Real-time stock data and analysis</p>
+              </div>
+              <div className="flex space-x-2">
+                {stocks.map((stock) => (
+                  <button
+                    key={stock.name}
+                    onClick={() => setSelectedStock(stock.name)}
+                    className={`px-4 py-2 rounded-lg transition-colors ${
+                      selectedStock === stock.name 
+                        ? 'bg-blue-600 text-white' 
+                        : 'bg-gray-200 text-gray-700'
+                    }`}
+                  >
+                    {stock.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Selected Stock Info */}
+            {(() => {
+              const selectedStockData = stocks.find(s => s.name === selectedStock)
+              return selectedStockData ? (
+                <div className="mb-6">
+                  <div className="flex items-center space-x-2 mb-4">
+                    <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs">🌙</span>
+                    </div>
+                    <span className="text-gray-900 font-semibold">{selectedStockData.name} Inc</span>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <span className="text-2xl font-bold">{selectedStockData.price} USD</span>
+                    <span className={`text-sm ${selectedStockData.change >= 0 ? 'text-red-600' : 'text-green-600'}`}>
+                      {selectedStockData.change} {selectedStockData.changePercent}%
+                    </span>
+                  </div>
+                </div>
+              ) : null
+            })()}
+
+            {/* Stock Chart */}
+            <div className="h-64 mb-6">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={stockData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="time" />
+                  <YAxis />
+                  <Tooltip />
+                  <Line type="monotone" dataKey="price" stroke="#3B82F6" strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Timeframe Options */}
+            <div className="flex space-x-2">
+              {['1D', '1M', '3M', '1Y', '5Y', 'All'].map((timeframe) => (
+                <button
+                  key={timeframe}
+                  className={`px-3 py-1 rounded-lg transition-colors ${
+                    timeframe === '1D' 
+                      ? 'bg-blue-600 text-white' 
+                      : 'bg-gray-200 text-gray-700'
+                  }`}
+                >
+                  {timeframe}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Transaction Statistics */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className="bg-white rounded-xl p-6 shadow-lg mb-8"
           >
             <div className="flex justify-between items-center mb-6">
@@ -237,6 +376,20 @@ export default function Dashboard() {
                 <Download className="w-4 h-4" />
                 <span>Download Statement</span>
               </button>
+            </div>
+
+            {/* Transaction Chart */}
+            <div className="h-64 mb-6">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={transactionData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Area type="monotone" dataKey="income" stackId="1" stroke="#10B981" fill="#10B981" />
+                  <Area type="monotone" dataKey="expenses" stackId="1" stroke="#EF4444" fill="#EF4444" />
+                </AreaChart>
+              </ResponsiveContainer>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -274,28 +427,13 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
-
-            {/* Company Logos */}
-            <div className="flex items-center space-x-6 mt-6 pt-6 border-t border-gray-200">
-              <div className="text-gray-600 font-semibold">Apple</div>
-              <div className="text-gray-600 font-semibold">Google</div>
-              <div className="text-gray-600 font-semibold">Microsoft</div>
-            </div>
-
-            {/* Apple Inc Section */}
-            <div className="mt-6 flex items-center space-x-2">
-              <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
-                <span className="text-white text-xs">🌙</span>
-              </div>
-              <span className="text-gray-900 font-semibold">Apple Inc</span>
-            </div>
           </motion.div>
 
           {/* Security Tips */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
             className="bg-white rounded-xl p-6 shadow-lg"
           >
             <h3 className="text-xl font-bold text-gray-900 mb-4">Security Tips</h3>
