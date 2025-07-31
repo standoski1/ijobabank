@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { 
   Shield, 
   CreditCard, 
@@ -21,6 +22,7 @@ import {
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeColor, setActiveColor] = useState('blue')
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
   const colorSchemes = {
     blue: {
@@ -38,9 +40,9 @@ export default function Home() {
   const currentColors = colorSchemes[activeColor as keyof typeof colorSchemes]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className={`min-h-screen ${isDarkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
@@ -53,10 +55,10 @@ export default function Home() {
             
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-8">
-              <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Home</a>
-              <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">About</a>
-              <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Services</a>
-              <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
+              <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</a>
+              <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a>
+              <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Services</a>
+              <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</a>
             </nav>
 
             <div className="hidden md:flex items-center space-x-4">
@@ -68,7 +70,7 @@ export default function Home() {
             <div className="md:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-700 hover:text-blue-600"
+                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -80,16 +82,16 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="md:hidden py-4 border-t"
+              className="md:hidden py-4 border-t border-gray-200 dark:border-gray-700"
             >
               <div className="flex flex-col space-y-4">
-                <a href="#" className="text-gray-700 hover:text-blue-600">Home</a>
-                <a href="#" className="text-gray-700 hover:text-blue-600">About</a>
-                <a href="#" className="text-gray-700 hover:text-blue-600">Services</a>
-                <a href="#" className="text-gray-700 hover:text-blue-600">Contact</a>
+                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Home</a>
+                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">About</a>
+                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Services</a>
+                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Contact</a>
                 <div className="pt-4 space-y-2">
-                  <button className="btn-primary w-full">Sign In</button>
-                  <button className="btn-secondary w-full">Open Account</button>
+                  <Link href="/login" className="btn-primary w-full block text-center">Sign In</Link>
+                  <Link href="/dashboard" className="btn-secondary w-full block text-center">Dashboard</Link>
                 </div>
               </div>
             </motion.div>
@@ -167,7 +169,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -175,10 +177,10 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Services We Provide
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Comprehensive financial solutions designed to meet all your banking needs
             </p>
           </motion.div>
@@ -227,15 +229,15 @@ export default function Home() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="card hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+                className="card hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 dark:bg-gray-700 dark:border-gray-600"
               >
                 <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 ${
-                  service.color === 'blue' ? 'bg-blue-100 text-blue-600' : 'bg-purple-100 text-purple-600'
+                  service.color === 'blue' ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' : 'bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-400'
                 }`}>
                   <service.icon className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">{service.title}</h3>
-                <p className="text-gray-600">{service.description}</p>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">{service.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{service.description}</p>
               </motion.div>
             ))}
           </div>
@@ -243,7 +245,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -251,10 +253,10 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
               What Our Clients Say
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               Trusted by thousands of customers worldwide
             </p>
           </motion.div>
@@ -279,21 +281,21 @@ export default function Home() {
                 initial={{ opacity: 0, x: index === 0 ? -30 : 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
-                className="card"
+                className="card dark:bg-gray-700 dark:border-gray-600"
               >
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-700 mb-6 italic">"{testimonial.content}"</p>
+                <p className="text-gray-700 dark:text-gray-300 mb-6 italic">"{testimonial.content}"</p>
                 <div className="flex items-center">
                   <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
                     {testimonial.name.charAt(0)}
                   </div>
                   <div className="ml-4">
-                    <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                    <p className="text-gray-600">{testimonial.role}</p>
+                    <h4 className="font-semibold text-gray-900 dark:text-white">{testimonial.name}</h4>
+                    <p className="text-gray-600 dark:text-gray-400">{testimonial.role}</p>
                   </div>
                 </div>
               </motion.div>
@@ -303,7 +305,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -311,10 +313,10 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Contact Us
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               Reach out to us anytime and anywhere
             </p>
           </motion.div>
@@ -344,11 +346,11 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <contact.icon className="w-8 h-8 text-blue-600" />
+                <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <contact.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{contact.title}</h3>
-                <p className="text-gray-600">{contact.content}</p>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{contact.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{contact.content}</p>
               </motion.div>
             ))}
           </div>
@@ -404,21 +406,39 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Color Theme Switcher */}
+      {/* Theme Switcher */}
       <div className="fixed bottom-4 right-4 z-50">
-        <div className="bg-white rounded-lg shadow-lg p-4">
-          <h4 className="text-sm font-semibold mb-2">Theme Colors</h4>
-          <div className="flex space-x-2">
-            <button
-              onClick={() => setActiveColor('blue')}
-              className={`w-8 h-8 rounded-full ${activeColor === 'blue' ? 'ring-2 ring-blue-500' : ''}`}
-              style={{ backgroundColor: colorSchemes.blue.primary }}
-            />
-            <button
-              onClick={() => setActiveColor('purple')}
-              className={`w-8 h-8 rounded-full ${activeColor === 'purple' ? 'ring-2 ring-purple-500' : ''}`}
-              style={{ backgroundColor: colorSchemes.purple.primary }}
-            />
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
+          <h4 className="text-sm font-semibold mb-2 dark:text-white">Theme Settings</h4>
+          <div className="space-y-3">
+            <div>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">Colors</p>
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => setActiveColor('blue')}
+                  className={`w-8 h-8 rounded-full ${activeColor === 'blue' ? 'ring-2 ring-blue-500' : ''}`}
+                  style={{ backgroundColor: colorSchemes.blue.primary }}
+                />
+                <button
+                  onClick={() => setActiveColor('purple')}
+                  className={`w-8 h-8 rounded-full ${activeColor === 'purple' ? 'ring-2 ring-purple-500' : ''}`}
+                  style={{ backgroundColor: colorSchemes.purple.primary }}
+                />
+              </div>
+            </div>
+            <div>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">Mode</p>
+              <button
+                onClick={() => setIsDarkMode(!isDarkMode)}
+                className={`px-3 py-1 rounded text-xs font-medium transition-colors ${
+                  isDarkMode 
+                    ? 'bg-gray-800 text-white' 
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                {isDarkMode ? 'Dark' : 'Light'}
+              </button>
+            </div>
           </div>
         </div>
       </div>

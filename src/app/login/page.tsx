@@ -7,6 +7,7 @@ import Link from 'next/link'
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(false)
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -20,10 +21,10 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
+    <div className={`min-h-screen ${isDarkMode ? 'dark bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-br from-blue-50 to-purple-50'} flex items-center justify-center p-4`}>
       <div className="max-w-md w-full">
         {/* Back to Home */}
-        <Link href="/" className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-8 transition-colors">
+        <Link href="/" className="inline-flex items-center text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Home
         </Link>
@@ -32,7 +33,7 @@ export default function Login() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-white rounded-2xl shadow-2xl p-8"
+          className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8"
         >
           {/* Logo */}
           <div className="text-center mb-8">
