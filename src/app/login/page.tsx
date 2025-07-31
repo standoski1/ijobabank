@@ -2,52 +2,52 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Eye, EyeOff, Lock, User, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
+import { Eye, EyeOff, User, Lock } from 'lucide-react'
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-    rememberMe: false
-  })
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle login logic here
-    console.log('Login attempt:', formData)
-  }
+  const [keepSignedIn, setKeepSignedIn] = useState(false)
 
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'dark bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-br from-blue-50 to-purple-50'} flex items-center justify-center p-4`}>
-      <div className="max-w-md w-full">
-        {/* Back to Home */}
-        <Link href="/" className="inline-flex items-center text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 mb-8 transition-colors">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Home
-        </Link>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8"
-        >
+    <div className="min-h-screen flex">
+      {/* Left Panel - Login Form */}
+      <div className="w-full lg:w-2/3 bg-white flex items-center justify-center p-8">
+        <div className="w-full max-w-md">
           {/* Logo */}
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Lock className="w-8 h-8 text-white" />
+            <div className="flex items-center justify-center space-x-2 mb-4">
+              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">KP</span>
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-blue-600">KeyPrime</h1>
+                <p className="text-blue-400 text-sm">Trust Banking</p>
+              </div>
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Welcome back!</h1>
-            <p className="text-gray-600 dark:text-gray-300 mt-2">Happy to see you again!</p>
           </div>
 
+          {/* Welcome Message */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome back!</h2>
+            <p className="text-gray-600">Happy to see you again!</p>
+          </motion.div>
+
           {/* Login Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-6"
+          >
+            {/* Username Field */}
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Username
               </label>
               <div className="relative">
@@ -55,20 +55,16 @@ export default function Login() {
                   <User className="h-5 w-5 text-gray-400" />
                 </div>
                 <input
-                  id="username"
-                  name="username"
                   type="text"
-                  required
-                  value={formData.username}
-                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
-                  placeholder="Enter your username"
+                  placeholder="Username"
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
             </div>
 
+            {/* Password Field */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
               <div className="relative">
@@ -76,113 +72,83 @@ export default function Login() {
                   <Lock className="h-5 w-5 text-gray-400" />
                 </div>
                 <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  required
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="block w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
-                  placeholder="Enter your password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  className="block w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
                   className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" />
+                    <EyeOff className="h-5 w-5 text-gray-400" />
                   ) : (
-                    <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300" />
+                    <Eye className="h-5 w-5 text-gray-400" />
                   )}
                 </button>
               </div>
             </div>
 
+            {/* Options */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
+              <label className="flex items-center">
                 <input
-                  id="remember-me"
-                  name="remember-me"
                   type="checkbox"
-                  checked={formData.rememberMe}
-                  onChange={(e) => setFormData({ ...formData, rememberMe: e.target.checked })}
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 rounded"
+                  checked={keepSignedIn}
+                  onChange={(e) => setKeepSignedIn(e.target.checked)}
+                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-                  Keep me signed in
-                </label>
-              </div>
-              <div className="text-sm">
-                <a href="#" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
-                  Forgot password?
-                </a>
-              </div>
+                <span className="ml-2 text-sm text-gray-600">Keep me signed in</span>
+              </label>
+              <Link href="/forgot-password" className="text-sm text-blue-600 hover:text-blue-500 underline">
+                Forgot password?
+              </Link>
             </div>
 
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+            {/* Login Button */}
+            <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 px-4 rounded-lg hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200"
+              className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200"
             >
               Login
-            </motion.button>
-          </form>
+            </button>
 
-          {/* Divider */}
-          <div className="my-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Or</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Create Account */}
-          <div className="text-center">
-            <p className="text-gray-600 dark:text-gray-300">
-              Don't have an account?{' '}
-              <Link href="/register" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
+            {/* Create Account Link */}
+            <div className="text-center">
+              <span className="text-sm text-gray-600">Don't have an account? </span>
+              <Link href="/signup" className="text-sm text-blue-600 hover:text-blue-500 underline">
                 Create
               </Link>
+            </div>
+          </motion.form>
+
+          {/* Copyright */}
+          <div className="text-center mt-8">
+            <p className="text-xs text-gray-500">
+              Copyright © 2025 All rights reserved.
             </p>
           </div>
+        </div>
+      </div>
 
-          {/* Security Notice */}
-          <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-            <div className="flex">
-              <div className="flex-shrink-0">
-                <Lock className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-              </div>
-              <div className="ml-3">
-                <h3 className="text-sm font-medium text-blue-800 dark:text-blue-200">Secure Login</h3>
-                <p className="text-sm text-blue-700 dark:text-blue-300 mt-1">
-                  Your information is protected with bank-level security encryption.
-                </p>
+      {/* Right Panel - Image */}
+      <div className="hidden lg:block lg:w-1/3 bg-gradient-to-br from-blue-600 to-purple-600 relative">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative h-full flex items-center justify-center">
+          <div className="text-center text-white p-8">
+            <div className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-24 h-24 bg-white/30 rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+                  <span className="text-blue-600 font-bold text-2xl">KP</span>
+                </div>
               </div>
             </div>
+            <h3 className="text-2xl font-bold mb-4">Secure Banking</h3>
+            <p className="text-blue-100">
+              Experience the future of banking with our secure and innovative platform
+            </p>
           </div>
-        </motion.div>
-
-        {/* Footer */}
-        <div className="text-center mt-8">
-          <p className="text-gray-500 dark:text-gray-400 text-sm">
-            Copyright © 2024 iJobaBank. All rights reserved.
-          </p>
-        </div>
-
-        {/* Dark Mode Toggle */}
-        <div className="fixed top-4 right-4">
-          <button
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            className="p-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-          >
-            {isDarkMode ? '☀️' : '🌙'}
-          </button>
         </div>
       </div>
     </div>

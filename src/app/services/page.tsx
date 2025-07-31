@@ -1,30 +1,9 @@
 "use client"
 
-import { useState } from 'react'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { 
-  Shield, 
-  CreditCard, 
-  PiggyBank, 
-  TrendingUp, 
-  Users, 
-  Star,
-  ArrowRight,
-  CheckCircle,
-  Phone,
-  Mail,
-  MapPin,
-  Menu,
-  X,
-  Search,
-  ChevronRight,
-  MessageCircle
-} from 'lucide-react'
+import { MessageCircle } from 'lucide-react'
 
-export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
+export default function Services() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -47,92 +26,21 @@ export default function Home() {
             
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-8">
-              <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">HOME</a>
-              <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">ABOUT</a>
-              <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">SERVICES</a>
-              <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">TESTIMONIALS</a>
-              <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">FAQS</a>
-              <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">CONTACT</a>
+              <a href="/" className="text-white hover:text-blue-200 transition-colors font-medium">HOME</a>
+              <a href="/about" className="text-white hover:text-blue-200 transition-colors font-medium">ABOUT</a>
+              <a href="/services" className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium">SERVICES</a>
+              <a href="/testimonials" className="text-white hover:text-blue-200 transition-colors font-medium">TESTIMONIALS</a>
+              <a href="/faqs" className="text-white hover:text-blue-200 transition-colors font-medium">FAQS</a>
+              <a href="/contact" className="text-white hover:text-blue-200 transition-colors font-medium">CONTACT</a>
             </nav>
 
             <div className="hidden md:flex items-center space-x-4">
-              <Link href="/login" className="text-white hover:text-blue-200 transition-colors font-medium">SIGN IN</Link>
-              <Link href="/dashboard" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-medium">OPEN ACCOUNT</Link>
-              <Search className="w-5 h-5 text-white" />
-            </div>
-
-            {/* Mobile menu button */}
-            <div className="md:hidden">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-white hover:text-blue-200"
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
+              <a href="/login" className="text-white hover:text-blue-200 transition-colors font-medium">SIGN IN</a>
+              <a href="/dashboard" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-medium">OPEN ACCOUNT</a>
             </div>
           </div>
-
-          {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="md:hidden py-4 border-t border-blue-700"
-            >
-              <div className="flex flex-col space-y-4">
-                <a href="#" className="text-white hover:text-blue-200 transition-colors">HOME</a>
-                <a href="#" className="text-white hover:text-blue-200 transition-colors">ABOUT</a>
-                <a href="#" className="text-white hover:text-blue-200 transition-colors">SERVICES</a>
-                <a href="#" className="text-white hover:text-blue-200 transition-colors">TESTIMONIALS</a>
-                <a href="#" className="text-white hover:text-blue-200 transition-colors">FAQS</a>
-                <a href="#" className="text-white hover:text-blue-200 transition-colors">CONTACT</a>
-                <div className="pt-4 space-y-2">
-                  <Link href="/login" className="text-white hover:text-blue-200 transition-colors block">SIGN IN</Link>
-                  <Link href="/dashboard" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors block text-center">OPEN ACCOUNT</Link>
-                </div>
-              </div>
-            </motion.div>
-          )}
         </div>
       </header>
-
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 text-white py-20">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-4xl md:text-6xl font-bold mb-6"
-            >
-              WE PROVIDE FINANCIAL SOLUTION FOR YOUR BUSINESS
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl mb-8 text-blue-100"
-            >
-              For all your personal financial goals, we're here to make sure life happens on your terms!
-            </motion.p>
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <Link href="/login" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg transition-colors font-semibold">
-                SIGN IN
-              </Link>
-              <Link href="/faqs" className="bg-white text-blue-900 hover:bg-gray-100 px-8 py-3 rounded-lg transition-colors font-semibold border border-blue-200">
-                FAQS
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* Services Section */}
       <section className="py-20 bg-white">
@@ -230,7 +138,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold mb-4 text-center">INCOME MONITORING</h3>
               <p className="text-gray-600 text-center">
-                For your convenience, most of our loan applications are approved and processed within 24 hours.
+                For your convenience, most of our loan applications are approved and processed within 24 hours. Plus, if you are a customer to our bank we'll reduce your loan rate by 0.5%.
               </p>
             </motion.div>
 
@@ -255,58 +163,104 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Welcome Section */}
+      {/* Additional Features Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              OUR OFFERS AND <span className="text-blue-600">SUPPORTS</span>
+            </h2>
+            <p className="text-xl text-gray-600">We care about our customers.</p>
+          </div>
+          
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                WELCOME TO <span className="text-blue-600">KEYPRIME TRUST BANKING</span>
-              </h2>
-              <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-gray-900">Why Choose Us</h3>
-                <div className="space-y-4 text-gray-600">
-                  <p>
-                    We provide comprehensive internet banking services that allow you to access your account 
-                    from anywhere in the world. Our secure platform ensures your financial data is protected 
-                    at all times.
-                  </p>
-                  <p>
-                    Access your account via PC or smart devices with our mobile banking app. We offer 
-                    24/7 customer support to assist you with any banking needs.
-                  </p>
-                  <p>
-                    Our secure financial transactions are backed by state-of-the-art encryption technology, 
-                    ensuring your money and personal information remain safe and confidential.
-                  </p>
+            <div className="space-y-6">
+              <div className="flex items-start space-x-4">
+                <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <span className="text-white text-sm">✓</span>
                 </div>
+                <p className="text-gray-700 text-lg">
+                  WE OFFERS LOANS AT A VERY LOW INTEREST RATE WITH LONG DURATION OF REPAYMENTS.
+                </p>
+              </div>
+              
+              <div className="flex items-start space-x-4">
+                <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <span className="text-white text-sm">✓</span>
+                </div>
+                <p className="text-gray-700 text-lg">
+                  WE ALWAYS HELP YOU TO GROW YOUR BUSINESS
+                </p>
+              </div>
+              
+              <div className="flex items-start space-x-4">
+                <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <span className="text-white text-sm">✓</span>
+                </div>
+                <p className="text-gray-700 text-lg">
+                  FAST DELIVERY OF CREDIT CARDS AT YOUR HOME.
+                </p>
+              </div>
+              
+              <div className="flex items-start space-x-4">
+                <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <span className="text-white text-sm">✓</span>
+                </div>
+                <p className="text-gray-700 text-lg">
+                  WE COUNSEL ON ANY INSURANCE MATTER.
+                </p>
+              </div>
+              
+              <div className="flex items-start space-x-4">
+                <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <span className="text-white text-sm">✓</span>
+                </div>
+                <p className="text-gray-700 text-lg">
+                  24/7 ONLINE CUSTOMER CARE SERVICES.
+                </p>
               </div>
             </div>
-            <div className="relative">
-              <div className="bg-white rounded-xl p-8 shadow-lg">
-                <div className="grid grid-cols-3 gap-4 mb-6">
-                  {['B', 'A', 'N', 'K', 'I', 'N', 'G'].map((letter, index) => (
-                    <div key={index} className="bg-blue-600 text-white rounded-lg p-4 text-center font-bold text-lg">
-                      {letter}
-                    </div>
-                  ))}
+            
+            <div className="bg-white rounded-xl p-8 shadow-lg">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Our Performance</h3>
+              <div className="space-y-6">
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-gray-700 font-medium">Communication</span>
+                    <span className="text-blue-600 font-bold">99%</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div className="bg-blue-600 h-3 rounded-full" style={{ width: '99%' }}></div>
+                  </div>
                 </div>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
-                    <span className="font-semibold">Deposits</span>
-                    <ChevronRight className="w-5 h-5 text-blue-600" />
+                
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-gray-700 font-medium">Support</span>
+                    <span className="text-blue-600 font-bold">99%</span>
                   </div>
-                  <div className="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
-                    <span className="font-semibold">Payments</span>
-                    <ChevronRight className="w-5 h-5 text-blue-600" />
+                  <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div className="bg-blue-600 h-3 rounded-full" style={{ width: '99%' }}></div>
                   </div>
-                  <div className="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
-                    <span className="font-semibold">Internet Banking</span>
-                    <ChevronRight className="w-5 h-5 text-blue-600" />
+                </div>
+                
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-gray-700 font-medium">Technology</span>
+                    <span className="text-blue-600 font-bold">98%</span>
                   </div>
-                  <div className="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
-                    <span className="font-semibold">Mobile Banking</span>
-                    <ChevronRight className="w-5 h-5 text-blue-600" />
+                  <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div className="bg-blue-600 h-3 rounded-full" style={{ width: '98%' }}></div>
+                  </div>
+                </div>
+                
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-gray-700 font-medium">Developments</span>
+                    <span className="text-blue-600 font-bold">90%</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div className="bg-blue-600 h-3 rounded-full" style={{ width: '90%' }}></div>
                   </div>
                 </div>
               </div>
@@ -325,4 +279,4 @@ export default function Home() {
       </div>
     </div>
   )
-}
+} 
