@@ -32,6 +32,7 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
+  const { login } = useAuth()
 
   const {
     register,
@@ -63,9 +64,8 @@ export default function Login() {
         throw new Error(result.error || 'Login failed')
       }
 
-      // Store token and user data
-      localStorage.setItem('token', result.token)
-      localStorage.setItem('user', JSON.stringify(result.user))
+      // Login user
+      login(result.user, result.token)
       
       // Redirect to dashboard
       router.push('/dashboard')

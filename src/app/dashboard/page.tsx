@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useAuth } from '@/contexts/AuthContext'
 import { 
   DollarSign, 
   CreditCard, 
@@ -50,9 +51,10 @@ export default function Dashboard() {
   const [selectedStock, setSelectedStock] = useState('Apple')
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const router = useRouter()
+  const { user, logout } = useAuth()
 
   const handleLogout = () => {
-    // Add any logout logic here (clear tokens, etc.)
+    logout()
     router.push('/')
   }
 
@@ -81,10 +83,10 @@ export default function Dashboard() {
             
             <div className="flex items-center space-x-4">
               <div className="hidden md:block text-center">
-                <p className="text-sm text-gray-600">Welcome back, John Wong</p>
+                <p className="text-sm text-gray-600">Welcome back, {user?.firstName} {user?.lastName}</p>
               </div>
               <div className="hidden lg:block text-right">
-                <p className="text-sm text-gray-600">2025-07-31 16:01:53</p>
+                <p className="text-sm text-gray-600">{new Date().toLocaleString()}</p>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
@@ -336,8 +338,8 @@ export default function Dashboard() {
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Current Balance</h3>
-                  <p className="text-3xl font-bold">USD $ 2,531,000</p>
-                  <p className="text-green-200 text-sm mt-2">0.05% from Current Balance: USD $ 2,531,000</p>
+                  <p className="text-3xl font-bold">USD $ {user?.balance?.toLocaleString() || '0'}</p>
+                  <p className="text-green-200 text-sm mt-2">Account: {user?.accountNumber}</p>
                 </div>
                 <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
                   <DollarSign className="w-6 h-6" />

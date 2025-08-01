@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useAuth } from '@/contexts/AuthContext'
 import { 
   Eye, 
   EyeOff, 
@@ -40,6 +41,7 @@ export default function Signup() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const router = useRouter()
+  const { login } = useAuth()
 
   const {
     register,
@@ -76,12 +78,11 @@ export default function Signup() {
         throw new Error(result.error || 'Signup failed')
       }
 
-      setSuccess('Account created successfully! Redirecting to login...')
+      setSuccess('Account created successfully! Redirecting to dashboard...')
       reset()
       
-      // Store token in localStorage
-      localStorage.setItem('token', result.token)
-      localStorage.setItem('user', JSON.stringify(result.user))
+      // Login user
+      login(result.user, result.token)
       
       // Redirect to dashboard after 2 seconds
       setTimeout(() => {
