@@ -11,7 +11,6 @@ import {
   Globe,
   Smartphone,
   Building,
-  DollarSign,
   Lock,
   CheckCircle,
   ArrowRight

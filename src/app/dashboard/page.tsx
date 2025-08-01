@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import { 
@@ -15,7 +14,6 @@ import {
   ChevronRight,
   Download,
   TrendingUp,
-  TrendingDown,
   User,
   Clock,
   Globe,

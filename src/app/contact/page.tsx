@@ -51,7 +51,7 @@ export default function Contact() {
       
       setSuccess('Thank you for your message! We\'ll get back to you within 24 hours.')
       reset()
-    } catch (error) {
+    } catch {
       setError('Failed to send message. Please try again.')
     } finally {
       setIsLoading(false)
