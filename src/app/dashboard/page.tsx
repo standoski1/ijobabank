@@ -510,8 +510,8 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <p className="text-lg font-semibold">XX-903446863-XXXXX</p>
-                  <p className="text-sm">CARD HOLDER: JOHN WONG -</p>
+                  <p className="text-lg font-semibold">XX-{user?.accountNumber?.slice(-4)}-XXXXX</p>
+                  <p className="text-sm">CARD HOLDER: {user?.firstName} {user?.lastName}</p>
                   <p className="text-sm">EXPIRES: 03/2027</p>
                 </div>
               </div>
@@ -527,8 +527,8 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <p className="text-lg font-semibold">Acct No#: 8845990764</p>
-                  <p className="text-sm">ACCOUNT HOLDER: JOHN WONG</p>
+                  <p className="text-lg font-semibold">Acct No#: {user?.accountNumber}</p>
+                  <p className="text-sm">ACCOUNT HOLDER: {user?.firstName} {user?.lastName}</p>
                   <p className="text-sm">TYPE: ONLINE BANKING</p>
                 </div>
               </div>
