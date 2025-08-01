@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useAuth } from '@/contexts/AuthContext'
 import { 
   User,
   Lock,
@@ -197,7 +198,7 @@ export default function Login() {
               <p className="text-gray-600">
                 Don't have an account?{' '}
                 <Link href="/signup" className="text-blue-600 hover:text-blue-500 underline">
-                  Create
+                  Create account
                 </Link>
               </p>
             </div>
