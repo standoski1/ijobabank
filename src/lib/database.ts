@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs'
-import { supabase } from './supabase'
+import { getDb } from './mongodb'
 
 export async function createUser(userData: {
   email: string
@@ -8,44 +8,59 @@ export async function createUser(userData: {
   lastName: string
   phone?: string
 }) {
+  console.log('🚀 Starting createUser function...')
+  console.log('📧 Email:', userData.email)
+  console.log('👤 Name:', userData.firstName, userData.lastName)
+  
   // Hash the password
   const hashedPassword = await bcrypt.hash(userData.password, 10)
   
   // Generate account number
   const accountNumber = generateAccountNumber()
+  console.log('🏦 Account number generated:', accountNumber)
   
   try {
-    const { data, error } = await supabase
-      .from('users')
-      .insert({
-        email: userData.email,
-        password: hashedPassword,
-        first_name: userData.firstName,
-        last_name: userData.lastName,
-        phone: userData.phone,
-        account_number: accountNumber,
-        balance: 0
-      })
-      .select()
-      .single()
-
-    if (error) {
-      if (error.code === '23505') { // Unique constraint violation
-        throw new Error('Email already exists')
-      }
-      throw error
+    console.log('📡 Attempting to connect to MongoDB...')
+    
+    const db = await getDb()
+    const usersCollection = db.collection('users')
+    
+    // Check if user already exists
+    const existingUser = await usersCollection.findOne({ email: userData.email })
+    if (existingUser) {
+      throw new Error('Email already exists')
     }
     
+    const userDoc = {
+      email: userData.email,
+      password: hashedPassword,
+      first_name: userData.firstName,
+      last_name: userData.lastName,
+      phone: userData.phone,
+      account_number: accountNumber,
+      balance: 0,
+      created_at: new Date(),
+      updated_at: new Date()
+    }
+    
+    const result = await usersCollection.insertOne(userDoc)
+    
+    if (!result.insertedId) {
+      throw new Error('Failed to create user')
+    }
+    
+    console.log('✅ User created successfully:', result.insertedId)
     return {
-      id: data.id,
-      email: data.email,
-      firstName: data.first_name,
-      lastName: data.last_name,
-      phone: data.phone,
-      accountNumber: data.account_number
+      id: result.insertedId.toString(),
+      email: userData.email,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      phone: userData.phone,
+      accountNumber: accountNumber
     }
   } catch (error) {
-    if (error instanceof Error && error.message === 'Email already exists') {
+    console.error('💥 Create user error:', error)
+    if (error instanceof Error) {
       throw error
     }
     throw new Error('Failed to create user')
@@ -53,52 +68,61 @@ export async function createUser(userData: {
 }
 
 export async function findUserByEmail(email: string) {
-  const { data, error } = await supabase
-    .from('users')
-    .select('*')
-    .eq('email', email)
-    .single()
+  try {
+    const db = await getDb()
+    const usersCollection = db.collection('users')
+    
+    const user = await usersCollection.findOne({ email })
+    
+    if (!user) {
+      return null
+    }
 
-  if (error || !data) {
+    return {
+      id: user._id.toString(),
+      email: user.email,
+      password: user.password,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      phone: user.phone,
+      accountNumber: user.account_number,
+      balance: user.balance,
+      createdAt: user.created_at,
+      updatedAt: user.updated_at
+    }
+  } catch (error) {
+    console.error('Error finding user by email:', error)
     return null
-  }
-
-  return {
-    id: data.id,
-    email: data.email,
-    password: data.password,
-    firstName: data.first_name,
-    lastName: data.last_name,
-    phone: data.phone,
-    accountNumber: data.account_number,
-    balance: data.balance,
-    createdAt: data.created_at,
-    updatedAt: data.updated_at
   }
 }
 
-export async function findUserById(id: number) {
-  const { data, error } = await supabase
-    .from('users')
-    .select('*')
-    .eq('id', id)
-    .single()
+export async function findUserById(id: string) {
+  try {
+    const db = await getDb()
+    const usersCollection = db.collection('users')
+    
+    const { ObjectId } = await import('mongodb')
+    const user = await usersCollection.findOne({ _id: new ObjectId(id) })
+    
+    if (!user) {
+      return null
+    }
 
-  if (error || !data) {
+    return {
+      id: user._id.toString(),
+      email: user.email,
+      password: user.password,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      phone: user.phone,
+      accountNumber: user.account_number,
+      balance: user.balance,
+      createdAt: user.created_at,
+      updatedAt: user.updated_at
+    }
+  } catch (error) {
+    console.error('Error finding user by ID:', error)
     return null
-  }
-
-  return {
-    id: data.id,
-    email: data.email,
-    password: data.password,
-    firstName: data.first_name,
-    lastName: data.last_name,
-    phone: data.phone,
-    accountNumber: data.account_number,
-    balance: data.balance,
-    createdAt: data.created_at,
-    updatedAt: data.updated_at
   }
 }
 
