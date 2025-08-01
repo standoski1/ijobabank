@@ -220,7 +220,7 @@ export default function FAQs() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">Email Support</h3>
               <p className="text-gray-600 mb-6">
-                Send us an email and we'll respond within 24 hours
+                Send us an email and we&apos;ll respond within 24 hours
               </p>
               <Link href="/contact" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors font-semibold inline-block">
                 Send Email

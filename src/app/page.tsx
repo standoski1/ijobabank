@@ -10,7 +10,6 @@ import {
   TrendingUp, 
   Users, 
   Star,
-  ArrowRight,
   CheckCircle,
   Phone,
   Mail,
@@ -98,12 +97,12 @@ export default function Home() {
             
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex space-x-8">
-              <a href="/" className="text-white hover:text-blue-200 transition-colors font-medium">HOME</a>
-              <a href="/about" className="text-white hover:text-blue-200 transition-colors font-medium">ABOUT</a>
-              <a href="/services" className="text-white hover:text-blue-200 transition-colors font-medium">SERVICES</a>
-              <a href="/testimonials" className="text-white hover:text-blue-200 transition-colors font-medium">TESTIMONIALS</a>
-              <a href="/faqs" className="text-white hover:text-blue-200 transition-colors font-medium">FAQS</a>
-              <a href="/contact" className="text-white hover:text-blue-200 transition-colors font-medium">CONTACT</a>
+              <Link href="/" className="text-white hover:text-blue-200 transition-colors font-medium">HOME</Link>
+              <Link href="/about" className="text-white hover:text-blue-200 transition-colors font-medium">ABOUT</Link>
+              <Link href="/services" className="text-white hover:text-blue-200 transition-colors font-medium">SERVICES</Link>
+              <Link href="/testimonials" className="text-white hover:text-blue-200 transition-colors font-medium">TESTIMONIALS</Link>
+              <Link href="/faqs" className="text-white hover:text-blue-200 transition-colors font-medium">FAQS</Link>
+              <Link href="/contact" className="text-white hover:text-blue-200 transition-colors font-medium">CONTACT</Link>
             </nav>
 
             <div className="hidden lg:flex items-center space-x-4">
@@ -131,12 +130,12 @@ export default function Home() {
               className="lg:hidden py-4 border-t border-blue-700"
             >
               <div className="flex flex-col space-y-4">
-                <a href="#" className="text-white hover:text-blue-200 transition-colors">HOME</a>
-                <a href="#" className="text-white hover:text-blue-200 transition-colors">ABOUT</a>
-                <a href="#" className="text-white hover:text-blue-200 transition-colors">SERVICES</a>
-                <a href="#" className="text-white hover:text-blue-200 transition-colors">TESTIMONIALS</a>
-                <a href="#" className="text-white hover:text-blue-200 transition-colors">FAQS</a>
-                <a href="#" className="text-white hover:text-blue-200 transition-colors">CONTACT</a>
+                <Link href="/" className="text-white hover:text-blue-200 transition-colors">HOME</Link>
+                <Link href="/about" className="text-white hover:text-blue-200 transition-colors">ABOUT</Link>
+                <Link href="/services" className="text-white hover:text-blue-200 transition-colors">SERVICES</Link>
+                <Link href="/testimonials" className="text-white hover:text-blue-200 transition-colors">TESTIMONIALS</Link>
+                <Link href="/faqs" className="text-white hover:text-blue-200 transition-colors">FAQS</Link>
+                <Link href="/contact" className="text-white hover:text-blue-200 transition-colors">CONTACT</Link>
                 <div className="pt-4 space-y-2">
                   <Link href="/login" className="text-white hover:text-blue-200 transition-colors block">SIGN IN</Link>
                   <Link href="/dashboard" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors block text-center">OPEN ACCOUNT</Link>
@@ -594,7 +593,7 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-600 mb-6">
-                "KeyPrime has transformed my banking experience. The mobile app is intuitive and the customer service is exceptional."
+                &quot;KeyPrime has transformed my banking experience. The mobile app is intuitive and the customer service is exceptional.&quot;
               </p>
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
@@ -619,7 +618,7 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-600 mb-6">
-                "The investment features are incredible. I've seen significant returns on my portfolio since switching to KeyPrime."
+                &quot;The investment features are incredible. I&apos;ve seen significant returns on my portfolio since switching to KeyPrime.&quot;
               </p>
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
@@ -644,7 +643,7 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-600 mb-6">
-                "Security is my top priority, and KeyPrime delivers. The biometric authentication gives me peace of mind."
+                &quot;Security is my top priority, and KeyPrime delivers. The biometric authentication gives me peace of mind.&quot;
               </p>
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
@@ -790,12 +789,12 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
               <ul className="space-y-3">
-                <li><a href="/" className="text-blue-200 hover:text-white transition-colors">Home</a></li>
-                <li><a href="/about" className="text-blue-200 hover:text-white transition-colors">About Us</a></li>
-                <li><a href="/services" className="text-blue-200 hover:text-white transition-colors">Services</a></li>
-                <li><a href="/testimonials" className="text-blue-200 hover:text-white transition-colors">Testimonials</a></li>
-                <li><a href="/faqs" className="text-blue-200 hover:text-white transition-colors">FAQs</a></li>
-                <li><a href="/contact" className="text-blue-200 hover:text-white transition-colors">Contact</a></li>
+                <li><Link href="/" className="text-blue-200 hover:text-white transition-colors">Home</Link></li>
+                <li><Link href="/about" className="text-blue-200 hover:text-white transition-colors">About Us</Link></li>
+                <li><Link href="/services" className="text-blue-200 hover:text-white transition-colors">Services</Link></li>
+                <li><Link href="/testimonials" className="text-blue-200 hover:text-white transition-colors">Testimonials</Link></li>
+                <li><Link href="/faqs" className="text-blue-200 hover:text-white transition-colors">FAQs</Link></li>
+                <li><Link href="/contact" className="text-blue-200 hover:text-white transition-colors">Contact</Link></li>
               </ul>
             </div>
 
@@ -803,12 +802,12 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-semibold mb-6">Services</h3>
               <ul className="space-y-3">
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Online Banking</a></li>
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Mobile Banking</a></li>
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Credit Cards</a></li>
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Loans</a></li>
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Investment</a></li>
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Insurance</a></li>
+                <li><Link href="/" className="text-blue-200 hover:text-white transition-colors">Online Banking</Link></li>
+                <li><Link href="/" className="text-blue-200 hover:text-white transition-colors">Mobile Banking</Link></li>
+                <li><Link href="/" className="text-blue-200 hover:text-white transition-colors">Credit Cards</Link></li>
+                <li><Link href="/" className="text-blue-200 hover:text-white transition-colors">Loans</Link></li>
+                <li><Link href="/" className="text-blue-200 hover:text-white transition-colors">Investment</Link></li>
+                <li><Link href="/" className="text-blue-200 hover:text-white transition-colors">Insurance</Link></li>
               </ul>
             </div>
 

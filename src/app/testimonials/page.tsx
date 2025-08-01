@@ -168,7 +168,7 @@ export default function Testimonials() {
                   ))}
                 </div>
                 <Quote className="w-8 h-8 text-blue-600 mb-4" />
-                <p className="text-gray-600 mb-6 italic">"{testimonial.content}"</p>
+                <p className="text-gray-600 mb-6 italic">&quot;{testimonial.content}&quot;</p>
                 <div className="flex items-center">
                   <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
                     <span className="text-white font-bold">{testimonial.avatar}</span>

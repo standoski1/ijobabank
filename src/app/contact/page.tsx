@@ -114,7 +114,7 @@ export default function Contact() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl md:text-2xl text-blue-200 max-w-3xl mx-auto"
             >
-              Get in touch with our team. We're here to help you with all your banking needs.
+              Get in touch with our team. We&apos;re here to help you with all your banking needs.
             </motion.p>
           </div>
         </div>
