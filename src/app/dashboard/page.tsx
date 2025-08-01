@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -51,7 +51,31 @@ export default function Dashboard() {
   const [selectedStock, setSelectedStock] = useState('Apple')
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const router = useRouter()
-  const { user, logout } = useAuth()
+  const { user, logout, isLoading } = useAuth()
+
+  // Protect dashboard - redirect to login if not authenticated
+  useEffect(() => {
+    if (!isLoading && !user) {
+      router.push('/login')
+    }
+  }, [user, isLoading, router])
+
+  // Show loading while checking authentication
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Don't render dashboard if not authenticated
+  if (!user) {
+    return null
+  }
 
   const handleLogout = () => {
     logout()

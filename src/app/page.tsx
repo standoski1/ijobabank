@@ -108,7 +108,7 @@ export default function Home() {
 
             <div className="hidden lg:flex items-center space-x-4">
               <Link href="/login" className="text-white hover:text-blue-200 transition-colors font-medium">SIGN IN</Link>
-              <Link href="/dashboard" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-medium">OPEN ACCOUNT</Link>
+              <Link href="/signup" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-medium">OPEN ACCOUNT</Link>
               <Search className="w-5 h-5 text-white" />
             </div>
 

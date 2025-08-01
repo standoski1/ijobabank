@@ -1,13 +1,72 @@
 "use client"
 
 import { motion } from 'framer-motion'
-import { MessageCircle } from 'lucide-react'
+import Link from 'next/link'
+import { 
+  CreditCard, 
+  PiggyBank, 
+  Shield, 
+  TrendingUp,
+  Users,
+  Globe,
+  Smartphone,
+  Building,
+  DollarSign,
+  Lock,
+  CheckCircle,
+  ArrowRight
+} from 'lucide-react'
+
+const services = [
+  {
+    icon: CreditCard,
+    title: "Credit & Debit Cards",
+    description: "Get instant virtual cards and physical cards delivered to your home with competitive rates and rewards.",
+    features: ["Virtual cards", "Physical cards", "Rewards program", "Contactless payments"],
+    color: "bg-blue-600"
+  },
+  {
+    icon: PiggyBank,
+    title: "Savings & Investment",
+    description: "Smart savings accounts with high interest rates and automated investment portfolios.",
+    features: ["High-yield savings", "Automated investing", "Goal tracking", "Portfolio management"],
+    color: "bg-green-600"
+  },
+  {
+    icon: TrendingUp,
+    title: "Loans & Financing",
+    description: "Personal and business loans with competitive rates and flexible repayment terms.",
+    features: ["Personal loans", "Business loans", "Mortgage services", "Quick approval"],
+    color: "bg-purple-600"
+  },
+  {
+    icon: Shield,
+    title: "Insurance Services",
+    description: "Comprehensive insurance coverage for life, health, property, and business needs.",
+    features: ["Life insurance", "Health coverage", "Property insurance", "Business protection"],
+    color: "bg-red-600"
+  },
+  {
+    icon: Smartphone,
+    title: "Mobile Banking",
+    description: "Full-featured mobile app for banking on the go with biometric authentication.",
+    features: ["Mobile app", "Biometric login", "Quick transfers", "Bill payments"],
+    color: "bg-indigo-600"
+  },
+  {
+    icon: Globe,
+    title: "International Banking",
+    description: "Global banking services with multi-currency accounts and international transfers.",
+    features: ["Multi-currency", "Global transfers", "Exchange rates", "International cards"],
+    color: "bg-yellow-600"
+  }
+]
 
 export default function Services() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-blue-900 text-white shadow-lg">
+      <header className="bg-blue-900 text-white shadow-lg fixed top-0 left-0 right-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
@@ -17,7 +76,7 @@ export default function Services() {
                     <span className="text-blue-900 font-bold text-lg">KP</span>
                   </div>
                   <div>
-                    <h1 className="text-xl font-bold">KeyPrime</h1>
+                    <h1 className="text-xl font-bold">KeyPrime Trust Banking</h1>
                     <p className="text-blue-200 text-sm">Trust Banking</p>
                   </div>
                 </div>
@@ -25,258 +84,254 @@ export default function Services() {
             </div>
             
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-8">
-              <a href="/" className="text-white hover:text-blue-200 transition-colors font-medium">HOME</a>
-              <a href="/about" className="text-white hover:text-blue-200 transition-colors font-medium">ABOUT</a>
-              <a href="/services" className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium">SERVICES</a>
-              <a href="/testimonials" className="text-white hover:text-blue-200 transition-colors font-medium">TESTIMONIALS</a>
-              <a href="/faqs" className="text-white hover:text-blue-200 transition-colors font-medium">FAQS</a>
-              <a href="/contact" className="text-white hover:text-blue-200 transition-colors font-medium">CONTACT</a>
+            <nav className="hidden lg:flex space-x-8">
+              <Link href="/" className="text-white hover:text-blue-200 transition-colors font-medium">HOME</Link>
+              <Link href="/about" className="text-white hover:text-blue-200 transition-colors font-medium">ABOUT</Link>
+              <Link href="/services" className="text-blue-200 font-medium">SERVICES</Link>
+              <Link href="/testimonials" className="text-white hover:text-blue-200 transition-colors font-medium">TESTIMONIALS</Link>
+              <Link href="/faqs" className="text-white hover:text-blue-200 transition-colors font-medium">FAQS</Link>
+              <Link href="/contact" className="text-white hover:text-blue-200 transition-colors font-medium">CONTACT</Link>
             </nav>
 
-            <div className="hidden md:flex items-center space-x-4">
-              <a href="/login" className="text-white hover:text-blue-200 transition-colors font-medium">SIGN IN</a>
-              <a href="/dashboard" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-medium">OPEN ACCOUNT</a>
+            <div className="hidden lg:flex items-center space-x-4">
+              <Link href="/login" className="text-white hover:text-blue-200 transition-colors font-medium">SIGN IN</Link>
+              <Link href="/signup" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-medium">OPEN ACCOUNT</Link>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Services Section */}
+      {/* Hero Section */}
+      <section className="pt-24 pb-16 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-4xl md:text-6xl font-bold mb-6"
+            >
+              Our <span className="text-blue-300">Services</span>
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-xl md:text-2xl text-blue-200 max-w-3xl mx-auto"
+            >
+              Comprehensive financial solutions designed to meet all your banking needs
+            </motion.p>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Grid */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+              >
+                <div className="p-8">
+                  <div className={`w-16 h-16 ${service.color} rounded-full flex items-center justify-center mb-6`}>
+                    <service.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">{service.title}</h3>
+                  <p className="text-gray-600 mb-6">{service.description}</p>
+                  <ul className="space-y-2 mb-6">
+                    {service.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center text-sm text-gray-600">
+                        <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link 
+                    href="/signup" 
+                    className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold"
+                  >
+                    Learn More
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Business Banking */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                Business <span className="text-blue-600">Banking</span>
+              </h2>
+              <p className="text-xl text-gray-600 mb-8">
+                Comprehensive banking solutions designed specifically for businesses of all sizes.
+              </p>
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-4 mt-1">
+                    <CheckCircle className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2">Business Accounts</h3>
+                    <p className="text-gray-600">Dedicated business accounts with specialized features and competitive rates.</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-4 mt-1">
+                    <CheckCircle className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2">Merchant Services</h3>
+                    <p className="text-gray-600">Payment processing solutions to help your business grow and succeed.</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-4 mt-1">
+                    <CheckCircle className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2">Business Loans</h3>
+                    <p className="text-gray-600">Flexible financing options to support your business expansion and growth.</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-white rounded-xl p-8 shadow-lg"
+            >
+              <div className="text-center">
+                <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Building className="w-10 h-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Business Solutions</h3>
+                <div className="space-y-4 text-left">
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <span className="font-semibold">Business Checking</span>
+                    <span className="text-green-600 font-bold">$0/month</span>
+                  </div>
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <span className="font-semibold">Merchant Services</span>
+                    <span className="text-green-600 font-bold">2.5%</span>
+                  </div>
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <span className="font-semibold">Business Loans</span>
+                    <span className="text-green-600 font-bold">From 5.5%</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Digital Banking Features */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              SERVICES WE <span className="text-blue-600">PROVIDE</span>
+              Digital <span className="text-blue-600">Banking</span>
             </h2>
+            <p className="text-xl text-gray-600">Experience the future of banking with our advanced digital platform</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Service Card 1 - Highlighted */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="bg-blue-600 text-white rounded-xl p-8 shadow-lg"
+              className="text-center"
             >
-              <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
-                  <span className="text-2xl font-bold">1</span>
-                </div>
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Lock className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold mb-4 text-center">FINANCIAL MANAGEMENT</h3>
-              <p className="text-blue-100 text-center">
-                Our financial services is very secured. Securities and insurance services are provided by Financial Services.
-              </p>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Secure Banking</h3>
+              <p className="text-gray-600">Multi-layer security with biometric authentication</p>
             </motion.div>
 
-            {/* Service Card 2 */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-white text-gray-900 rounded-xl p-8 shadow-lg border border-gray-200"
+              className="text-center"
             >
-              <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-2xl font-bold text-white">2</span>
-                </div>
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Smartphone className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold mb-4 text-center">FINANCIAL INVESTMENT</h3>
-              <p className="text-gray-600 text-center">
-                We offers Loans at a very low Interest Rate with long duration of repayments.
-              </p>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Mobile App</h3>
+              <p className="text-gray-600">Full-featured mobile banking on iOS and Android</p>
             </motion.div>
 
-            {/* Service Card 3 */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white text-gray-900 rounded-xl p-8 shadow-lg border border-gray-200"
+              className="text-center"
             >
-              <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-2xl font-bold text-white">3</span>
-                </div>
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Globe className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold mb-4 text-center">CREDIT CARD</h3>
-              <p className="text-gray-600 text-center">
-                Fast delivery of Credit Cards at your home.
-              </p>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">24/7 Access</h3>
+              <p className="text-gray-600">Bank anytime, anywhere with our online platform</p>
             </motion.div>
 
-            {/* Service Card 4 */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-white text-gray-900 rounded-xl p-8 shadow-lg border border-gray-200"
+              className="text-center"
             >
-              <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-2xl font-bold text-white">4</span>
-                </div>
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold mb-4 text-center">BUSINESS CONSULTING</h3>
-              <p className="text-gray-600 text-center">
-                Reach our customer care for counseling on any business matter.
-              </p>
-            </motion.div>
-
-            {/* Service Card 5 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-white text-gray-900 rounded-xl p-8 shadow-lg border border-gray-200"
-            >
-              <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-2xl font-bold text-white">5</span>
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-center">INCOME MONITORING</h3>
-              <p className="text-gray-600 text-center">
-                For your convenience, most of our loan applications are approved and processed within 24 hours. Plus, if you are a customer to our bank we'll reduce your loan rate by 0.5%.
-              </p>
-            </motion.div>
-
-            {/* Service Card 6 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="bg-white text-gray-900 rounded-xl p-8 shadow-lg border border-gray-200"
-            >
-              <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-2xl font-bold text-white">6</span>
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-center">INSURANCE CONSULTING</h3>
-              <p className="text-gray-600 text-center">
-                Reach our customer care for counseling on any insurance matter.
-              </p>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Customer Support</h3>
+              <p className="text-gray-600">24/7 customer support via chat, phone, and email</p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Additional Features Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              OUR OFFERS AND <span className="text-blue-600">SUPPORTS</span>
+      {/* CTA Section */}
+      <section className="py-20 bg-blue-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-4xl font-bold mb-6">
+              Ready to Experience Our <span className="text-blue-300">Services</span>?
             </h2>
-            <p className="text-xl text-gray-600">We care about our customers.</p>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <span className="text-white text-sm">✓</span>
-                </div>
-                <p className="text-gray-700 text-lg">
-                  WE OFFERS LOANS AT A VERY LOW INTEREST RATE WITH LONG DURATION OF REPAYMENTS.
-                </p>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <span className="text-white text-sm">✓</span>
-                </div>
-                <p className="text-gray-700 text-lg">
-                  WE ALWAYS HELP YOU TO GROW YOUR BUSINESS
-                </p>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <span className="text-white text-sm">✓</span>
-                </div>
-                <p className="text-gray-700 text-lg">
-                  FAST DELIVERY OF CREDIT CARDS AT YOUR HOME.
-                </p>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <span className="text-white text-sm">✓</span>
-                </div>
-                <p className="text-gray-700 text-lg">
-                  WE COUNSEL ON ANY INSURANCE MATTER.
-                </p>
-              </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <span className="text-white text-sm">✓</span>
-                </div>
-                <p className="text-gray-700 text-lg">
-                  24/7 ONLINE CUSTOMER CARE SERVICES.
-                </p>
-              </div>
+            <p className="text-xl text-blue-200 mb-8">
+              Join millions of customers who trust KeyPrime for their banking needs
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/signup" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg transition-colors font-semibold text-lg">
+                OPEN ACCOUNT
+              </Link>
+              <Link href="/contact" className="bg-white text-blue-900 hover:bg-gray-100 px-8 py-4 rounded-lg transition-colors font-semibold text-lg border border-blue-200">
+                CONTACT US
+              </Link>
             </div>
-            
-            <div className="bg-white rounded-xl p-8 shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Our Performance</h3>
-              <div className="space-y-6">
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-700 font-medium">Communication</span>
-                    <span className="text-blue-600 font-bold">99%</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-3">
-                    <div className="bg-blue-600 h-3 rounded-full" style={{ width: '99%' }}></div>
-                  </div>
-                </div>
-                
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-700 font-medium">Support</span>
-                    <span className="text-blue-600 font-bold">99%</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-3">
-                    <div className="bg-blue-600 h-3 rounded-full" style={{ width: '99%' }}></div>
-                  </div>
-                </div>
-                
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-700 font-medium">Technology</span>
-                    <span className="text-blue-600 font-bold">98%</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-3">
-                    <div className="bg-blue-600 h-3 rounded-full" style={{ width: '98%' }}></div>
-                  </div>
-                </div>
-                
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-700 font-medium">Developments</span>
-                    <span className="text-blue-600 font-bold">90%</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-3">
-                    <div className="bg-blue-600 h-3 rounded-full" style={{ width: '90%' }}></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          </motion.div>
         </div>
       </section>
-
-      {/* Floating Chat Button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-lg flex items-center space-x-2 transition-all duration-200">
-          <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-          <span className="font-medium">Chat</span>
-          <MessageCircle className="w-5 h-5" />
-        </button>
-      </div>
     </div>
   )
 } 
