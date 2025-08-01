@@ -218,7 +218,7 @@ export default function About() {
               <h3 className="text-xl font-bold text-gray-900 mb-4">Transparency</h3>
               <p className="text-gray-600">
                 We believe in complete transparency in all our operations, ensuring you always 
-                know what's happening with your money.
+                know what&apos;s happening with your money.
               </p>
             </motion.div>
 

@@ -98,12 +98,12 @@ export default function Home() {
             
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex space-x-8">
-              <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">HOME</a>
-              <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">ABOUT</a>
-              <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">SERVICES</a>
-              <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">TESTIMONIALS</a>
-              <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">FAQS</a>
-              <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">CONTACT</a>
+              <a href="/" className="text-white hover:text-blue-200 transition-colors font-medium">HOME</a>
+              <a href="/about" className="text-white hover:text-blue-200 transition-colors font-medium">ABOUT</a>
+              <a href="/services" className="text-white hover:text-blue-200 transition-colors font-medium">SERVICES</a>
+              <a href="/testimonials" className="text-white hover:text-blue-200 transition-colors font-medium">TESTIMONIALS</a>
+              <a href="/faqs" className="text-white hover:text-blue-200 transition-colors font-medium">FAQS</a>
+              <a href="/contact" className="text-white hover:text-blue-200 transition-colors font-medium">CONTACT</a>
             </nav>
 
             <div className="hidden lg:flex items-center space-x-4">
@@ -790,12 +790,12 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
               <ul className="space-y-3">
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Home</a></li>
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">About Us</a></li>
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Services</a></li>
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Testimonials</a></li>
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">FAQs</a></li>
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Contact</a></li>
+                <li><a href="/" className="text-blue-200 hover:text-white transition-colors">Home</a></li>
+                <li><a href="/about" className="text-blue-200 hover:text-white transition-colors">About Us</a></li>
+                <li><a href="/services" className="text-blue-200 hover:text-white transition-colors">Services</a></li>
+                <li><a href="/testimonials" className="text-blue-200 hover:text-white transition-colors">Testimonials</a></li>
+                <li><a href="/faqs" className="text-blue-200 hover:text-white transition-colors">FAQs</a></li>
+                <li><a href="/contact" className="text-blue-200 hover:text-white transition-colors">Contact</a></li>
               </ul>
             </div>
 
