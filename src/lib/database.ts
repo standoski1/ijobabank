@@ -8,19 +8,14 @@ export async function createUser(userData: {
   lastName: string
   phone?: string
 }) {
-  console.log('🚀 Starting createUser function...')
-  console.log('📧 Email:', userData.email)
-  console.log('👤 Name:', userData.firstName, userData.lastName)
   
   // Hash the password
   const hashedPassword = await bcrypt.hash(userData.password, 10)
   
   // Generate account number
   const accountNumber = generateAccountNumber()
-  console.log('🏦 Account number generated:', accountNumber)
   
   try {
-    console.log('📡 Attempting to connect to MongoDB...')
     
     const db = await getDb()
     const usersCollection = db.collection('ijobabankuser')
@@ -49,7 +44,6 @@ export async function createUser(userData: {
       throw new Error('Failed to create user')
     }
     
-    console.log('✅ User created successfully:', result.insertedId)
     return {
       id: result.insertedId.toString(),
       email: userData.email,
@@ -59,7 +53,6 @@ export async function createUser(userData: {
       accountNumber: accountNumber
     }
   } catch (error) {
-    console.error('💥 Create user error:', error)
     if (error instanceof Error) {
       throw error
     }
@@ -90,8 +83,7 @@ export async function findUserByEmail(email: string) {
       createdAt: user.created_at,
       updatedAt: user.updated_at
     }
-  } catch (error) {
-    console.error('Error finding user by email:', error)
+  } catch {
     return null
   }
 }
@@ -120,8 +112,7 @@ export async function findUserById(id: string) {
       createdAt: user.created_at,
       updatedAt: user.updated_at
     }
-  } catch (error) {
-    console.error('Error finding user by ID:', error)
+  } catch{
     return null
   }
 }
