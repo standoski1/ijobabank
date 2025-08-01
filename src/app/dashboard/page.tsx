@@ -177,7 +177,7 @@ export default function Dashboard() {
               </div>
             </div>
             
-            <div className="absolute bottom-8 left-4 right-4">
+            <div className="absolute bottom-[100px] left-4 right-4">
               <button 
                 onClick={handleLogout}
                 className="w-full bg-red-600 hover:bg-red-700 text-white p-3 rounded-lg flex items-center justify-center space-x-2 transition-colors"
@@ -268,7 +268,7 @@ export default function Dashboard() {
               </div>
             </div>
             
-            <div className="absolute bottom-8 left-4 right-4">
+            <div className="absolute bottom-[100px] left-4 right-4">
               <button 
                 onClick={handleLogout}
                 className="w-full bg-red-600 hover:bg-red-700 text-white p-3 rounded-lg flex items-center justify-center space-x-2 transition-colors"
