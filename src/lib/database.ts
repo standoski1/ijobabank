@@ -23,7 +23,7 @@ export async function createUser(userData: {
     console.log('📡 Attempting to connect to MongoDB...')
     
     const db = await getDb()
-    const usersCollection = db.collection('users')
+    const usersCollection = db.collection('ijobabankuser')
     
     // Check if user already exists
     const existingUser = await usersCollection.findOne({ email: userData.email })
@@ -70,7 +70,7 @@ export async function createUser(userData: {
 export async function findUserByEmail(email: string) {
   try {
     const db = await getDb()
-    const usersCollection = db.collection('users')
+    const usersCollection = db.collection('ijobabankuser')
     
     const user = await usersCollection.findOne({ email })
     
@@ -99,7 +99,7 @@ export async function findUserByEmail(email: string) {
 export async function findUserById(id: string) {
   try {
     const db = await getDb()
-    const usersCollection = db.collection('users')
+    const usersCollection = db.collection('ijobabankuser')
     
     const { ObjectId } = await import('mongodb')
     const user = await usersCollection.findOne({ _id: new ObjectId(id) })
