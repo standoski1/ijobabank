@@ -1,62 +1,77 @@
 "use client"
 
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { 
-  Shield, 
-  CreditCard, 
-  PiggyBank, 
-  TrendingUp, 
-  Users, 
   Star,
-  ArrowRight,
-  CheckCircle,
-  Phone,
-  Mail,
-  MapPin,
-  Menu,
-  X,
-  Search,
-  ChevronRight,
-  MessageCircle,
-  Quote
+  Quote,
+  User,
+  CheckCircle
 } from 'lucide-react'
 
+const testimonials = [
+  {
+    name: "Sarah Mitchell",
+    role: "Business Owner",
+    company: "Mitchell Enterprises",
+    rating: 5,
+    content: "KeyPrime has transformed my business banking experience. The mobile app is incredibly intuitive and the customer service is exceptional. I've been able to manage my business finances more efficiently than ever before.",
+    avatar: "SM"
+  },
+  {
+    name: "John Davis",
+    role: "Investment Manager",
+    company: "Davis Financial",
+    rating: 5,
+    content: "The investment features are incredible. I've seen significant returns on my portfolio since switching to KeyPrime. Their investment tools and market insights are top-notch.",
+    avatar: "JD"
+  },
+  {
+    name: "Emma Lopez",
+    role: "Tech Consultant",
+    company: "Lopez Tech Solutions",
+    rating: 5,
+    content: "Security is my top priority, and KeyPrime delivers. The biometric authentication gives me peace of mind, and the platform is incredibly secure. Highly recommended!",
+    avatar: "EL"
+  },
+  {
+    name: "Michael Rodriguez",
+    role: "Entrepreneur",
+    company: "Rodriguez Ventures",
+    rating: 5,
+    content: "The business banking services are outstanding. Quick loan approvals, competitive rates, and excellent merchant services. KeyPrime has been instrumental in my business growth.",
+    avatar: "MR"
+  },
+  {
+    name: "Lisa Chen",
+    role: "Freelance Designer",
+    company: "Chen Design Studio",
+    rating: 5,
+    content: "As a freelancer, I need flexible banking solutions. KeyPrime's mobile app and online services make managing my finances so much easier. The customer support is always helpful.",
+    avatar: "LC"
+  },
+  {
+    name: "David Thompson",
+    role: "Retiree",
+    company: "Personal Account",
+    rating: 5,
+    content: "I've been with KeyPrime for over 10 years and couldn't be happier. The savings rates are competitive, and the retirement planning tools are excellent. They truly care about their customers.",
+    avatar: "DT"
+  }
+]
+
+const stats = [
+  { number: "2.5M+", label: "Happy Customers" },
+  { number: "4.9/5", label: "Average Rating" },
+  { number: "99.9%", label: "Customer Satisfaction" },
+  { number: "150+", label: "Countries Served" }
+]
+
 export default function Testimonials() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const testimonials = [
-    {
-      quote: "Loving you guys the more with your smooth operations and quick transactions.",
-      name: "ETHAN SMITH",
-      role: "CLIENT",
-      image: "/api/placeholder/60/60"
-    },
-    {
-      quote: "Banking made easy! Quick response and fast transactions. You guys are the best.",
-      name: "JOHN RODGER",
-      role: "CLIENT",
-      image: "/api/placeholder/60/60"
-    },
-    {
-      quote: "Excellent service and very professional team. Highly recommended!",
-      name: "SARAH JOHNSON",
-      role: "CLIENT",
-      image: "/api/placeholder/60/60"
-    },
-    {
-      quote: "The best banking experience I've ever had. Fast, secure, and reliable.",
-      name: "MICHAEL BROWN",
-      role: "CLIENT",
-      image: "/api/placeholder/60/60"
-    }
-  ]
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-blue-900 text-white shadow-lg">
+      <header className="bg-blue-900 text-white shadow-lg fixed top-0 left-0 right-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
@@ -66,7 +81,7 @@ export default function Testimonials() {
                     <span className="text-blue-900 font-bold text-lg">KP</span>
                   </div>
                   <div>
-                    <h1 className="text-xl font-bold">KeyPrime</h1>
+                    <h1 className="text-xl font-bold">KeyPrime Trust Banking</h1>
                     <p className="text-blue-200 text-sm">Trust Banking</p>
                   </div>
                 </div>
@@ -74,106 +89,94 @@ export default function Testimonials() {
             </div>
             
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-8">
+            <nav className="hidden lg:flex space-x-8">
               <Link href="/" className="text-white hover:text-blue-200 transition-colors font-medium">HOME</Link>
               <Link href="/about" className="text-white hover:text-blue-200 transition-colors font-medium">ABOUT</Link>
               <Link href="/services" className="text-white hover:text-blue-200 transition-colors font-medium">SERVICES</Link>
-              <Link href="/testimonials" className="text-blue-200 bg-blue-700 px-3 py-1 rounded transition-colors font-medium">TESTIMONIALS</Link>
+              <Link href="/testimonials" className="text-blue-200 font-medium">TESTIMONIALS</Link>
               <Link href="/faqs" className="text-white hover:text-blue-200 transition-colors font-medium">FAQS</Link>
               <Link href="/contact" className="text-white hover:text-blue-200 transition-colors font-medium">CONTACT</Link>
             </nav>
 
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-4">
               <Link href="/login" className="text-white hover:text-blue-200 transition-colors font-medium">SIGN IN</Link>
-              <Link href="/dashboard" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-medium">OPEN ACCOUNT</Link>
-              <Search className="w-5 h-5 text-white" />
-            </div>
-
-            {/* Mobile menu button */}
-            <div className="md:hidden">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-white hover:text-blue-200"
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
+              <Link href="/signup" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-medium">OPEN ACCOUNT</Link>
             </div>
           </div>
-
-          {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="md:hidden py-4 border-t border-blue-700"
-            >
-              <div className="flex flex-col space-y-4">
-                <Link href="/" className="text-white hover:text-blue-200 transition-colors">HOME</Link>
-                <Link href="/about" className="text-white hover:text-blue-200 transition-colors">ABOUT</Link>
-                <Link href="/services" className="text-white hover:text-blue-200 transition-colors">SERVICES</Link>
-                <Link href="/testimonials" className="text-blue-200 bg-blue-700 px-3 py-1 rounded transition-colors">TESTIMONIALS</Link>
-                <Link href="/faqs" className="text-white hover:text-blue-200 transition-colors">FAQS</Link>
-                <Link href="/contact" className="text-white hover:text-blue-200 transition-colors">CONTACT</Link>
-                <div className="pt-4 space-y-2">
-                  <Link href="/login" className="text-white hover:text-blue-200 transition-colors block">SIGN IN</Link>
-                  <Link href="/dashboard" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors block text-center">OPEN ACCOUNT</Link>
-                </div>
-              </div>
-            </motion.div>
-          )}
         </div>
       </header>
 
-      {/* Testimonials Section */}
-      <section className="py-20 bg-blue-900">
+      {/* Hero Section */}
+      <section className="pt-24 pb-16 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center">
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-4xl font-bold text-blue-300 mb-4"
+              transition={{ duration: 0.6 }}
+              className="text-4xl md:text-6xl font-bold mb-6"
             >
-              TESTIMONIALS
+              Customer <span className="text-blue-300">Testimonials</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-2xl font-semibold text-white"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-xl md:text-2xl text-blue-200 max-w-3xl mx-auto"
             >
-              WHAT OUR CLIENTS SAYS
+              Real stories from satisfied customers worldwide
             </motion.p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div 
-                key={index}
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-xl p-8 shadow-lg"
+                className="text-center"
               >
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0">
-                    <Quote className="w-8 h-8 text-blue-600" />
+                <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">{stat.number}</div>
+                <div className="text-gray-600">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Grid */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={testimonial.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <div className="flex items-center mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <Quote className="w-8 h-8 text-blue-600 mb-4" />
+                <p className="text-gray-600 mb-6 italic">"{testimonial.content}"</p>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-white font-bold">{testimonial.avatar}</span>
                   </div>
-                  <div className="flex-1">
-                    <p className="text-gray-700 text-lg mb-6 italic">
-                      "{testimonial.quote}"
-                    </p>
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center border-2 border-blue-200">
-                        <span className="text-white font-bold text-sm">
-                          {testimonial.name.split(' ').map(n => n[0]).join('')}
-                        </span>
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-gray-900">{testimonial.name}</h3>
-                        <p className="text-gray-600 text-sm">{testimonial.role}</p>
-                      </div>
-                    </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                    <p className="text-gray-500 text-sm">{testimonial.role}</p>
+                    <p className="text-blue-600 text-sm">{testimonial.company}</p>
                   </div>
                 </div>
               </motion.div>
@@ -182,196 +185,90 @@ export default function Testimonials() {
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* Why Choose Us */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-4xl font-bold text-gray-900 mb-4"
-            >
-              FREQUENTLY ASK QUESTION <span className="text-blue-600">(FAQ)</span>
-            </motion.h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Why Customers <span className="text-blue-600">Choose Us</span>
+            </h2>
+            <p className="text-xl text-gray-600">The reasons why millions trust KeyPrime with their finances</p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-6"
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
             >
-              <div className="bg-gray-50 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">How do I open an account?</h3>
-                <p className="text-gray-600">
-                  You can open an account online through our secure portal or visit any of our branches. 
-                  You'll need to provide valid identification and proof of address.
-                </p>
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <CheckCircle className="w-8 h-8 text-white" />
               </div>
-              
-              <div className="bg-gray-50 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">What are your interest rates?</h3>
-                <p className="text-gray-600">
-                  Our interest rates vary by account type and are competitive in the market. 
-                  Please contact our customer service for current rates.
-                </p>
-              </div>
-              
-              <div className="bg-gray-50 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Is online banking secure?</h3>
-                <p className="text-gray-600">
-                  Yes, our online banking platform uses state-of-the-art encryption and security measures 
-                  to protect your personal and financial information.
-                </p>
-              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Trusted & Secure</h3>
+              <p className="text-gray-600">
+                With over 15 years of experience and state-of-the-art security, your money is safe with us.
+              </p>
             </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-6"
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-center"
             >
-              <div className="bg-gray-50 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">How do I apply for a loan?</h3>
-                <p className="text-gray-600">
-                  You can apply for a loan online or visit a branch. We offer various loan types 
-                  with competitive rates and flexible repayment terms.
-                </p>
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <User className="w-8 h-8 text-white" />
               </div>
-              
-              <div className="bg-gray-50 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">What documents do I need?</h3>
-                <p className="text-gray-600">
-                  Typically, you'll need a government-issued ID, proof of income, and proof of address. 
-                  Specific requirements may vary by service.
-                </p>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Customer First</h3>
+              <p className="text-gray-600">
+                Our dedicated support team is available 24/7 to help you with any banking needs.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-center"
+            >
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Star className="w-8 h-8 text-white" />
               </div>
-              
-              <div className="bg-gray-50 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">How can I contact customer service?</h3>
-                <p className="text-gray-600">
-                  You can reach our customer service team 24/7 through phone, email, or live chat. 
-                  We're here to help with all your banking needs.
-                </p>
-              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Innovation</h3>
+              <p className="text-gray-600">
+                We continuously innovate to provide the best banking experience for our customers.
+              </p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-blue-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Company Info */}
-            <div className="lg:col-span-1">
-              <div className="flex items-center space-x-2 mb-6">
-                <div className="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center">
-                  <span className="text-blue-900 font-bold text-lg">KP</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold">KeyPrime</h3>
-                  <p className="text-blue-200 text-sm">Trust Banking</p>
-                </div>
-              </div>
-              <p className="text-blue-200 mb-6">
-                Providing secure and reliable banking solutions for individuals and businesses worldwide.
-              </p>
-              <div className="flex space-x-4">
-                <a href="#" className="text-blue-200 hover:text-white transition-colors">
-                  <span className="sr-only">Facebook</span>
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                  </svg>
-                </a>
-                <a href="#" className="text-blue-200 hover:text-white transition-colors">
-                  <span className="sr-only">Twitter</span>
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                  </svg>
-                </a>
-                <a href="#" className="text-blue-200 hover:text-white transition-colors">
-                  <span className="sr-only">LinkedIn</span>
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                </a>
-              </div>
+      {/* CTA Section */}
+      <section className="py-20 bg-blue-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-4xl font-bold mb-6">
+              Join Our <span className="text-blue-300">Happy Customers</span>
+            </h2>
+            <p className="text-xl text-blue-200 mb-8">
+              Experience the KeyPrime difference and see why millions choose us
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/signup" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg transition-colors font-semibold text-lg">
+                OPEN ACCOUNT
+              </Link>
+              <Link href="/contact" className="bg-white text-blue-900 hover:bg-gray-100 px-8 py-4 rounded-lg transition-colors font-semibold text-lg border border-blue-200">
+                CONTACT US
+              </Link>
             </div>
-
-            {/* Quick Links */}
-            <div>
-              <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
-              <ul className="space-y-3">
-                <li><Link href="/" className="text-blue-200 hover:text-white transition-colors">Home</Link></li>
-                <li><Link href="/about" className="text-blue-200 hover:text-white transition-colors">About Us</Link></li>
-                <li><Link href="/services" className="text-blue-200 hover:text-white transition-colors">Services</Link></li>
-                <li><Link href="/testimonials" className="text-blue-200 hover:text-white transition-colors">Testimonials</Link></li>
-                <li><Link href="/faqs" className="text-blue-200 hover:text-white transition-colors">FAQs</Link></li>
-                <li><Link href="/contact" className="text-blue-200 hover:text-white transition-colors">Contact</Link></li>
-              </ul>
-            </div>
-
-            {/* Services */}
-            <div>
-              <h3 className="text-lg font-semibold mb-6">Services</h3>
-              <ul className="space-y-3">
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Online Banking</a></li>
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Mobile Banking</a></li>
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Credit Cards</a></li>
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Loans</a></li>
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Investment</a></li>
-                <li><a href="#" className="text-blue-200 hover:text-white transition-colors">Insurance</a></li>
-              </ul>
-            </div>
-
-            {/* Contact Info */}
-            <div>
-              <h3 className="text-lg font-semibold mb-6">Contact Info</h3>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <Phone className="w-5 h-5 text-blue-300" />
-                  <span className="text-blue-200">+1 (555) 123-4567</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Mail className="w-5 h-5 text-blue-300" />
-                  <span className="text-blue-200">info@keyprime.com</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <MapPin className="w-5 h-5 text-blue-300" />
-                  <span className="text-blue-200">123 Banking Street, Financial District, NY 10001</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Footer */}
-          <div className="border-t border-blue-800 mt-12 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-blue-200 text-sm">
-                © 2025 KeyPrime Trust Banking. All rights reserved.
-              </p>
-              <div className="flex space-x-6 mt-4 md:mt-0">
-                <a href="#" className="text-blue-200 hover:text-white text-sm transition-colors">Privacy Policy</a>
-                <a href="#" className="text-blue-200 hover:text-white text-sm transition-colors">Terms of Service</a>
-                <a href="#" className="text-blue-200 hover:text-white text-sm transition-colors">Cookie Policy</a>
-              </div>
-            </div>
-          </div>
+          </motion.div>
         </div>
-      </footer>
-
-      {/* Floating Chat Button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-lg flex items-center space-x-2 transition-all duration-200">
-          <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-          <span className="font-medium">Chat</span>
-          <MessageCircle className="w-5 h-5" />
-        </button>
-      </div>
+      </section>
     </div>
   )
 } 
