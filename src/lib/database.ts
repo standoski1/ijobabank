@@ -1,34 +1,5 @@
-import sqlite3 from 'sqlite3'
-import { open, Database } from 'sqlite'
 import bcrypt from 'bcryptjs'
-
-let db: Database | null = null
-
-export async function getDatabase() {
-  if (!db) {
-    db = await open({
-      filename: './users.db',
-      driver: sqlite3.Database
-    })
-    
-    // Create users table if it doesn't exist
-    await db.exec(`
-      CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        email TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL,
-        firstName TEXT NOT NULL,
-        lastName TEXT NOT NULL,
-        phone TEXT,
-        accountNumber TEXT UNIQUE,
-        balance REAL DEFAULT 0,
-        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
-      )
-    `)
-  }
-  return db
-}
+import { supabase } from './supabase'
 
 export async function createUser(userData: {
   email: string
@@ -37,8 +8,6 @@ export async function createUser(userData: {
   lastName: string
   phone?: string
 }) {
-  const db = await getDatabase()
-  
   // Hash the password
   const hashedPassword = await bcrypt.hash(userData.password, 10)
   
@@ -46,35 +15,91 @@ export async function createUser(userData: {
   const accountNumber = generateAccountNumber()
   
   try {
-    const result = await db.run(`
-      INSERT INTO users (email, password, firstName, lastName, phone, accountNumber)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `, [userData.email, hashedPassword, userData.firstName, userData.lastName, userData.phone, accountNumber])
+    const { data, error } = await supabase
+      .from('users')
+      .insert({
+        email: userData.email,
+        password: hashedPassword,
+        first_name: userData.firstName,
+        last_name: userData.lastName,
+        phone: userData.phone,
+        account_number: accountNumber,
+        balance: 0
+      })
+      .select()
+      .single()
+
+    if (error) {
+      if (error.code === '23505') { // Unique constraint violation
+        throw new Error('Email already exists')
+      }
+      throw error
+    }
     
     return {
-      id: result.lastID,
-      email: userData.email,
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-      phone: userData.phone,
-      accountNumber
+      id: data.id,
+      email: data.email,
+      firstName: data.first_name,
+      lastName: data.last_name,
+      phone: data.phone,
+      accountNumber: data.account_number
     }
   } catch (error) {
-    if (error instanceof Error && error.message.includes('UNIQUE constraint failed')) {
-      throw new Error('Email already exists')
+    if (error instanceof Error && error.message === 'Email already exists') {
+      throw error
     }
-    throw error
+    throw new Error('Failed to create user')
   }
 }
 
 export async function findUserByEmail(email: string) {
-  const db = await getDatabase()
-  return await db.get('SELECT * FROM users WHERE email = ?', [email])
+  const { data, error } = await supabase
+    .from('users')
+    .select('*')
+    .eq('email', email)
+    .single()
+
+  if (error || !data) {
+    return null
+  }
+
+  return {
+    id: data.id,
+    email: data.email,
+    password: data.password,
+    firstName: data.first_name,
+    lastName: data.last_name,
+    phone: data.phone,
+    accountNumber: data.account_number,
+    balance: data.balance,
+    createdAt: data.created_at,
+    updatedAt: data.updated_at
+  }
 }
 
 export async function findUserById(id: number) {
-  const db = await getDatabase()
-  return await db.get('SELECT * FROM users WHERE id = ?', [id])
+  const { data, error } = await supabase
+    .from('users')
+    .select('*')
+    .eq('id', id)
+    .single()
+
+  if (error || !data) {
+    return null
+  }
+
+  return {
+    id: data.id,
+    email: data.email,
+    password: data.password,
+    firstName: data.first_name,
+    lastName: data.last_name,
+    phone: data.phone,
+    accountNumber: data.account_number,
+    balance: data.balance,
+    createdAt: data.created_at,
+    updatedAt: data.updated_at
+  }
 }
 
 export async function verifyPassword(password: string, hashedPassword: string) {
