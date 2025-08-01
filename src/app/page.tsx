@@ -21,7 +21,9 @@ import {
   ChevronRight,
   MessageCircle,
   ChevronLeft,
-  ChevronRight as ChevronRightIcon
+  ChevronRight as ChevronRightIcon,
+  DollarSign,
+  Globe
 } from 'lucide-react'
 
 export default function Home() {
@@ -77,7 +79,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-blue-900 text-white shadow-lg">
+      <header className="bg-blue-900 text-white shadow-lg fixed top-0 left-0 right-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
@@ -95,7 +97,7 @@ export default function Home() {
             </div>
             
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-8">
+            <nav className="hidden lg:flex space-x-8">
               <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">HOME</a>
               <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">ABOUT</a>
               <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">SERVICES</a>
@@ -104,14 +106,14 @@ export default function Home() {
               <a href="#" className="text-white hover:text-blue-200 transition-colors font-medium">CONTACT</a>
             </nav>
 
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-4">
               <Link href="/login" className="text-white hover:text-blue-200 transition-colors font-medium">SIGN IN</Link>
               <Link href="/dashboard" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-medium">OPEN ACCOUNT</Link>
               <Search className="w-5 h-5 text-white" />
             </div>
 
             {/* Mobile menu button */}
-            <div className="md:hidden">
+            <div className="lg:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="text-white hover:text-blue-200"
@@ -126,7 +128,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="md:hidden py-4 border-t border-blue-700"
+              className="lg:hidden py-4 border-t border-blue-700"
             >
               <div className="flex flex-col space-y-4">
                 <a href="#" className="text-white hover:text-blue-200 transition-colors">HOME</a>
@@ -146,16 +148,16 @@ export default function Home() {
       </header>
 
       {/* Hero Slider */}
-      <section className="relative h-screen overflow-hidden">
+      <section className="relative h-screen overflow-hidden mt-16">
         {slides.map((slide, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 0, x: 100 }}
             animate={{ 
               opacity: currentSlide === index ? 1 : 0,
-              scale: currentSlide === index ? 1 : 1.1
+              x: currentSlide === index ? 0 : (index > currentSlide ? 100 : -100)
             }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
             className={`absolute inset-0 ${slide.bgImage} text-white`}
           >
             <div className="absolute inset-0 bg-black/20"></div>
@@ -396,6 +398,291 @@ export default function Home() {
               </p>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Statistics Section */}
+      <section className="py-20 bg-blue-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">
+              OUR <span className="text-blue-300">ACHIEVEMENTS</span>
+            </h2>
+            <p className="text-xl text-blue-200">Trusted by millions of customers worldwide</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
+            >
+              <div className="w-20 h-20 bg-blue-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-10 h-10 text-blue-300" />
+              </div>
+              <h3 className="text-3xl font-bold mb-2">2.5M+</h3>
+              <p className="text-blue-200">Active Customers</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-center"
+            >
+              <div className="w-20 h-20 bg-blue-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                <DollarSign className="w-10 h-10 text-blue-300" />
+              </div>
+              <h3 className="text-3xl font-bold mb-2">$50B+</h3>
+              <p className="text-blue-200">Assets Under Management</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-center"
+            >
+              <div className="w-20 h-20 bg-blue-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Globe className="w-10 h-10 text-blue-300" />
+              </div>
+              <h3 className="text-3xl font-bold mb-2">150+</h3>
+              <p className="text-blue-200">Countries Served</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-center"
+            >
+              <div className="w-20 h-20 bg-blue-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Shield className="w-10 h-10 text-blue-300" />
+              </div>
+              <h3 className="text-3xl font-bold mb-2">99.9%</h3>
+              <p className="text-blue-200">Security Rating</p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              WHY CHOOSE <span className="text-blue-600">KEYPRIME</span>
+            </h2>
+            <p className="text-xl text-gray-600">Experience banking reimagined with cutting-edge technology</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6">
+                <Shield className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Advanced Security</h3>
+              <p className="text-gray-600">
+                Multi-layer encryption and biometric authentication ensure your financial data remains secure.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6">
+                <TrendingUp className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Smart Investments</h3>
+              <p className="text-gray-600">
+                AI-powered investment recommendations and automated portfolio management.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6">
+                <CreditCard className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Digital Cards</h3>
+              <p className="text-gray-600">
+                Instant virtual cards and contactless payments for seamless transactions.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6">
+                <MessageCircle className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">24/7 Support</h3>
+              <p className="text-gray-600">
+                Round-the-clock customer support with live chat and video consultations.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6">
+                <PiggyBank className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Smart Savings</h3>
+              <p className="text-gray-600">
+                Automated savings goals and intelligent spending insights.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6">
+                <Globe className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Global Access</h3>
+              <p className="text-gray-600">
+                Banking services available worldwide with competitive exchange rates.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              WHAT OUR <span className="text-blue-600">CUSTOMERS SAY</span>
+            </h2>
+            <p className="text-xl text-gray-600">Real stories from satisfied customers worldwide</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-white rounded-xl p-8 shadow-lg"
+            >
+              <div className="flex items-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                ))}
+              </div>
+              <p className="text-gray-600 mb-6">
+                "KeyPrime has transformed my banking experience. The mobile app is intuitive and the customer service is exceptional."
+              </p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                  <span className="text-white font-bold">SM</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Sarah Mitchell</h4>
+                  <p className="text-gray-500 text-sm">Business Owner</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="bg-white rounded-xl p-8 shadow-lg"
+            >
+              <div className="flex items-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                ))}
+              </div>
+              <p className="text-gray-600 mb-6">
+                "The investment features are incredible. I've seen significant returns on my portfolio since switching to KeyPrime."
+              </p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                  <span className="text-white font-bold">JD</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">John Davis</h4>
+                  <p className="text-gray-500 text-sm">Investment Manager</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-white rounded-xl p-8 shadow-lg"
+            >
+              <div className="flex items-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                ))}
+              </div>
+              <p className="text-gray-600 mb-6">
+                "Security is my top priority, and KeyPrime delivers. The biometric authentication gives me peace of mind."
+              </p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                  <span className="text-white font-bold">EL</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Emma Lopez</h4>
+                  <p className="text-gray-500 text-sm">Tech Consultant</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-blue-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-4xl font-bold mb-6">
+              READY TO START YOUR <span className="text-blue-300">FINANCIAL JOURNEY</span>?
+            </h2>
+            <p className="text-xl text-blue-200 mb-8">
+              Join millions of customers who trust KeyPrime for their banking needs
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/dashboard" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg transition-colors font-semibold text-lg">
+                OPEN ACCOUNT
+              </Link>
+              <Link href="/about" className="bg-white text-blue-900 hover:bg-gray-100 px-8 py-4 rounded-lg transition-colors font-semibold text-lg border border-blue-200">
+                LEARN MORE
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 

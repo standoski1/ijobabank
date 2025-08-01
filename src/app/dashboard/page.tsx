@@ -19,7 +19,8 @@ import {
   Clock,
   Globe,
   Plus,
-  MessageCircle
+  MessageCircle,
+  Menu
 } from 'lucide-react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts'
 
@@ -47,6 +48,7 @@ const transactionData = [
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('profile')
   const [selectedStock, setSelectedStock] = useState('Apple')
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const router = useRouter()
 
   const handleLogout = () => {
@@ -63,7 +65,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
+      <header className="bg-white shadow-sm border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
@@ -78,10 +80,10 @@ export default function Dashboard() {
             </div>
             
             <div className="flex items-center space-x-4">
-              <div className="text-center">
+              <div className="hidden md:block text-center">
                 <p className="text-sm text-gray-600">Welcome back, John Wong</p>
               </div>
-              <div className="text-right">
+              <div className="hidden lg:block text-right">
                 <p className="text-sm text-gray-600">2025-07-31 16:01:53</p>
               </div>
               <div className="flex items-center space-x-2">
@@ -93,14 +95,112 @@ export default function Dashboard() {
                 <Globe className="w-4 h-4 text-gray-400" />
                 <Clock className="w-4 h-4 text-gray-400" />
               </div>
+              {/* Mobile menu button */}
+              <button
+                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                className="lg:hidden text-gray-600 hover:text-gray-900"
+              >
+                <Menu className="w-6 h-6" />
+              </button>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="flex">
+      <div className="flex pt-16">
         {/* Sidebar */}
-        <aside className="w-64 bg-blue-900 min-h-screen relative">
+        <aside className="hidden lg:block w-64 bg-blue-900 min-h-screen fixed left-0 top-16 z-40">
+          <nav className="mt-8">
+            <div className="px-4 space-y-2">
+              <div className="flex items-center justify-between p-3 text-white hover:bg-blue-800 rounded-lg cursor-pointer">
+                <div className="flex items-center space-x-3">
+                  <DollarSign className="w-5 h-5" />
+                  <span>Dashboard</span>
+                </div>
+                <div className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">2</div>
+              </div>
+              
+              <div className="flex items-center justify-between p-3 text-white hover:bg-blue-800 rounded-lg cursor-pointer">
+                <div className="flex items-center space-x-3">
+                  <User className="w-5 h-5" />
+                  <span>My Account</span>
+                </div>
+                <ChevronRight className="w-4 h-4" />
+              </div>
+              
+              <div className="flex items-center justify-between p-3 text-white hover:bg-blue-800 rounded-lg cursor-pointer">
+                <div className="flex items-center space-x-3">
+                  <DollarSign className="w-5 h-5" />
+                  <span>Fund Transfer</span>
+                </div>
+                <ChevronRight className="w-4 h-4" />
+              </div>
+              
+              <div className="flex items-center justify-between p-3 text-white hover:bg-blue-800 rounded-lg cursor-pointer">
+                <div className="flex items-center space-x-3">
+                  <TrendingUp className="w-5 h-5" />
+                  <span>Transactions</span>
+                </div>
+                <ChevronRight className="w-4 h-4" />
+              </div>
+              
+              <div className="flex items-center justify-between p-3 text-white hover:bg-blue-800 rounded-lg cursor-pointer">
+                <div className="flex items-center space-x-3">
+                  <CreditCard className="w-5 h-5" />
+                  <span>Bank Cards</span>
+                </div>
+                <ChevronRight className="w-4 h-4" />
+              </div>
+              
+              <div className="flex items-center justify-between p-3 text-white hover:bg-blue-800 rounded-lg cursor-pointer">
+                <div className="flex items-center space-x-3">
+                  <PiggyBank className="w-5 h-5" />
+                  <span>Make Deposit</span>
+                </div>
+                <ChevronRight className="w-4 h-4" />
+              </div>
+              
+              <div className="flex items-center justify-between p-3 text-white hover:bg-blue-800 rounded-lg cursor-pointer">
+                <div className="flex items-center space-x-3">
+                  <Shield className="w-5 h-5" />
+                  <span>Security</span>
+                </div>
+                <ChevronRight className="w-4 h-4" />
+              </div>
+              
+              <div className="flex items-center justify-between p-3 text-white hover:bg-blue-800 rounded-lg cursor-pointer">
+                <div className="flex items-center space-x-3">
+                  <HelpCircle className="w-5 h-5" />
+                  <span>Get Help</span>
+                </div>
+                <ChevronRight className="w-4 h-4" />
+              </div>
+            </div>
+            
+            <div className="absolute bottom-8 left-4 right-4">
+              <button 
+                onClick={handleLogout}
+                className="w-full bg-red-600 hover:bg-red-700 text-white p-3 rounded-lg flex items-center justify-center space-x-2 transition-colors"
+              >
+                <LogOut className="w-5 h-5" />
+                <span>Logout</span>
+              </button>
+            </div>
+          </nav>
+        </aside>
+
+        {/* Mobile Sidebar Overlay */}
+        {isSidebarOpen && (
+          <div 
+            className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
+        
+        {/* Mobile Sidebar */}
+        <aside className={`lg:hidden fixed top-16 left-0 h-full w-64 bg-blue-900 z-40 transform transition-transform duration-300 ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}>
           <nav className="mt-8">
             <div className="px-4 space-y-2">
               <div className="flex items-center justify-between p-3 text-white hover:bg-blue-800 rounded-lg cursor-pointer">
@@ -181,39 +281,42 @@ export default function Dashboard() {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-8 lg:ml-64">
           {/* Action Tabs */}
-          <div className="flex space-x-4 mb-8">
+          <div className="grid grid-cols-2 lg:flex lg:space-x-4 gap-2 lg:gap-0 mb-8">
             <button
               onClick={() => setActiveTab('quick-transfer')}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
+              className={`flex items-center justify-center space-x-2 px-3 lg:px-4 py-2 rounded-lg transition-colors text-sm lg:text-base ${
                 activeTab === 'quick-transfer' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-700'
               }`}
             >
               <DollarSign className="w-4 h-4" />
-              <span>Quick Transfer</span>
+              <span className="hidden sm:inline">Quick Transfer</span>
+              <span className="sm:hidden">Transfer</span>
             </button>
             <button
               onClick={() => setActiveTab('open-ticket')}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
+              className={`flex items-center justify-center space-x-2 px-3 lg:px-4 py-2 rounded-lg transition-colors text-sm lg:text-base ${
                 activeTab === 'open-ticket' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-700'
               }`}
             >
               <HelpCircle className="w-4 h-4" />
-              <span>Open Ticket</span>
+              <span className="hidden sm:inline">Open Ticket</span>
+              <span className="sm:hidden">Ticket</span>
             </button>
             <button
               onClick={() => setActiveTab('messages')}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
+              className={`flex items-center justify-center space-x-2 px-3 lg:px-4 py-2 rounded-lg transition-colors text-sm lg:text-base ${
                 activeTab === 'messages' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-700'
               }`}
             >
               <MessageCircle className="w-4 h-4" />
-              <span>Messages</span>
+              <span className="hidden sm:inline">Messages</span>
+              <span className="sm:hidden">Chat</span>
             </button>
             <button
               onClick={() => setActiveTab('profile')}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
+              className={`flex items-center justify-center space-x-2 px-3 lg:px-4 py-2 rounded-lg transition-colors text-sm lg:text-base ${
                 activeTab === 'profile' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-700'
               }`}
             >
@@ -223,7 +326,7 @@ export default function Dashboard() {
           </div>
 
           {/* Account Balance Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mb-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -287,17 +390,17 @@ export default function Dashboard() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="bg-white rounded-xl p-6 shadow-lg mb-8"
           >
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-6 gap-4">
               <div>
                 <h3 className="text-xl font-bold text-gray-900">Stock Information</h3>
                 <p className="text-gray-600">Real-time stock data and analysis</p>
               </div>
-              <div className="flex space-x-2">
+              <div className="flex flex-wrap gap-2">
                 {stocks.map((stock) => (
                   <button
                     key={stock.name}
                     onClick={() => setSelectedStock(stock.name)}
-                    className={`px-4 py-2 rounded-lg transition-colors ${
+                    className={`px-3 lg:px-4 py-2 rounded-lg transition-colors text-sm lg:text-base ${
                       selectedStock === stock.name 
                         ? 'bg-blue-600 text-white' 
                         : 'bg-gray-200 text-gray-700'
@@ -367,14 +470,15 @@ export default function Dashboard() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="bg-white rounded-xl p-6 shadow-lg mb-8"
           >
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-6 gap-4">
               <div>
                 <h3 className="text-xl font-bold text-gray-900">Transaction Statistics</h3>
-                <p className="text-gray-600">Show all Overview from 2018-01-18 - July 17, 2022 See Details</p>
+                <p className="text-gray-600 text-sm lg:text-base">Show all Overview from 2018-01-18 - July 17, 2022 See Details</p>
               </div>
-              <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2">
+              <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center justify-center space-x-2 text-sm lg:text-base">
                 <Download className="w-4 h-4" />
-                <span>Download Statement</span>
+                <span className="hidden sm:inline">Download Statement</span>
+                <span className="sm:hidden">Download</span>
               </button>
             </div>
 
@@ -392,7 +496,7 @@ export default function Dashboard() {
               </ResponsiveContainer>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
               {/* Bank Card Display */}
               <div className="bg-green-600 text-white rounded-xl p-6">
                 <div className="flex justify-between items-start mb-4">
